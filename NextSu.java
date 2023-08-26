@@ -14,16 +14,24 @@ public class NextSu {
     }
 
     private int next(int i) {
-        while(i != id[i]) {
+        while(i != id[i] && id[i] >= 0) {
             id[i] = id[id[i]] >= 0 ? id[id[i]] : id[i];
             i = id[i];
         }
-        return i < 0 ? -i : i;
+        return i;
+    }
+
+    private int max(int i, int j) {
+        // Compare absolute values
+        i = i < 0 ? -i : i;
+        j = j < 0 ? -j : j;
+        return i < j ? -j : -i;
     }
 
 
     public int find(int i) {
-        return id[next(i)];
+        i = id[next(i)];
+        return i < 0 ? -i : i;
     }
 
     public void remove(int i) {
@@ -31,18 +39,21 @@ public class NextSu {
         int q = next(i+1);
         if (p == q) return;
 
-        if(size[i] < size[q]) {
-            id[i] = q;
-            size[q] += size[i];
+        int newMax = max(id[p], id[q]);
+        if(size[p] < size[q]) {
+            id[p] = q;
+            id[q] = newMax;
+            size[q] += size[p];
         } else {
-            id[q] = i;
-            size[i] += size[q];
+            id[q] = p;
+            id[p] = newMax;
+            size[q] += size[p];
         }
         return;
     }
 
     public static void main(String[] args) {
-        NextSu test = new NextSu(10);
+        NextSu test = new NextSu(3000);
         StdOut.println(test.find(1));
         StdOut.println(test.find(5));
         test.remove(1);
@@ -54,6 +65,14 @@ public class NextSu {
         test.remove(3);
         test.remove(2);
         StdOut.println(test.find(1));
+        StdOut.println(test.find(8));
+        for(int i = 50; i < 1700; i++) {
+            if(i == 1500) continue;
+            test.remove(i);
+        }
+        StdOut.println(test.find(200));
+        StdOut.println(test.find(1510));
+        StdOut.println(test.find(4));
         
     }
 }
