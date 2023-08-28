@@ -52,7 +52,7 @@ public class Percolation {
                 helperUF.union(center, bottom);
             }
         }
-        
+        StdOut.println((row == size) && isFull(row,col) ? "Percolates" : "Does not percolate");
     }
     public boolean isOpen(int row, int col) {
         int i = checkArgument(row, col);
@@ -60,10 +60,7 @@ public class Percolation {
     }
     public boolean isFull(int row, int col) {
         int i = checkArgument(row, col);
-        if(isOpen(row, col)) {
-
-        }
-        return site[i];
+        return isOpen(row, col) && helperUF.find(i) == helperUF.find(0);
     }
     public int numberOfOpenSites() {
         return 0;
@@ -84,7 +81,6 @@ public class Percolation {
         }
         test.open(1,1);
         test.open(1,2);
-        StdOut.println(test.percolates() ? "Percolates" : "Does not percolate");
     }
 }
 
