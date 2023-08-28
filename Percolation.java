@@ -15,7 +15,13 @@ public class Percolation {
         site[0] = true;
         for(int i = 1; i <= (N * N); i++) {
             // first and last row connect to upper and lower index
-            if(i <= N) helperUF.union(i, 0);
+            if(i <= N) {
+                StdOut.println("i: " + i + " N: " + N);
+                helperUF.union(0, i);
+            } else if(i >= (N * (N - 1))) {
+                helperUF.union(N * N + 1, i);
+                StdOut.println("i: " + i);
+            }
 
             // All sites start blocked
             site[i] = false;
@@ -88,10 +94,12 @@ public class Percolation {
         Percolation test = new Percolation(20);
         for (int i = 1; i <= 20; i++) {
             for(int j = 1; j <= 20; j++) {
-                StdOut.println(i + "," + j + " is: " + (test.isOpen(i,j) ? "Open" : "Blocked"));
+                // StdOut.println(i + "," + j + " is: " + (test.isOpen(i,j) ? "Open" : "Blocked"));
                 // StdOut.println("Path to :" + i + "," + j + " is: " + test.path[i][j]);
+                // StdOut.println(test.helperUF.find(test.xyto1D(i,j)));
             }
         }
+        StdOut.println(test.helperUF.find(401) == test.helperUF.find(0) ? "Percolates" : "Does not percolate");
     }
 
 
