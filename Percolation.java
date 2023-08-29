@@ -22,7 +22,7 @@ public class Percolation {
             if (i > (size * (size - 1))) {
                 helperUF.union((size * size) + 1, i);
                 // StdOut.println((size * size) + 1 + " i:" + i);
-            };
+            }
             site[i] = false; // All sites start blocked
         }
     }
@@ -98,14 +98,10 @@ public class Percolation {
         //     test.open(i,j);
         // }
         StdOut.println(test.percolates());
-        test.open(1,1);
+        test.open(1, 1);
         StdOut.println(test.percolates());
-        test.open(2,2);
+        test.open(2, 2);
         StdOut.println(test.percolates());
         StdOut.println(test.percolates() ? "Percolates at: " + test.numberOfOpenSites() : "Doesnt percolate");
     }
 }
-
-// 1,1 // 1,2
-// &&  // &&
-// 2,1 // 2,2
