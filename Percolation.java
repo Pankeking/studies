@@ -102,6 +102,6 @@ public class Percolation {
         StdOut.println(test.percolates());
         test.open(2, 2);
         StdOut.println(test.percolates());
-        StdOut.println(test.percolates() ? "Percolates at: " + test.numberOfOpenSites() : "Doesnt percolate");
+        StdOut.println(test.percolates() ? "Percolates at: " + test.numberOfOpenSites() : "Doesn't percolate");
     }
 }
