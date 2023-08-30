@@ -1,6 +1,5 @@
 import random
 file_path = "8k_int.txt"
-data = ""
 
 numbers = (list(range(1, 80001)))
 random.shuffle(numbers)
