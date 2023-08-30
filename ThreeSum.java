@@ -1,6 +1,11 @@
 
 public class ThreeSum {
     
-    public ThreeSum(int q, int p, int r) {
+    public ThreeSum() {
+        
     } 
+
+    public static void main(String[] args) {
+        
+    }
 }

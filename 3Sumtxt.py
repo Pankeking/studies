@@ -2,7 +2,7 @@ import random
 
 file_path = "3Sum.txt"
 
-lower_bound = 0
+lower_bound = -1000
 upper_bound = 1000
 num_integers = 200
 
