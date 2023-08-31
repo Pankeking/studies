@@ -9,4 +9,4 @@ num_integers = 200
 randomNumbers = [random.randint(lower_bound, upper_bound) for _ in range(num_integers)]
 
 with open(file_path, 'w') as file:
-    file.write(",\n".join(map(str, randomNumbers)))
+    file.write("\n".join(map(str, randomNumbers)))
