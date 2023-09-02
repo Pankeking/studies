@@ -15,20 +15,29 @@ public class PitonicSearch {
         result = binarySearch(pitonicArray, peak, target);
     }
 
-    private int binaryPeak(int[] pitonicArray) {
-        
+    private int binaryPeak(int[] biArray) {
+        int left = 0;
+        int right = biArray.length - 1;
+        while (left <= right) {
+            int mid = right / 2;
+            if (biArray[mid] < biArray[mid + 1]) {
+                left = mid;
+            } else if (biArray[mid] < biArray[mid - 1]) {
+                right = mid;
+            }
+        }
     }
 
-    private boolean binarySearch(int[] pitonicArray, int target) {
-        int arrayLength = pitonicArray.length;
+    private boolean binarySearch(int[] biArray, int target) {
+        int arrayLength = biArray.length;
         int mid = (arrayLength - 1) / 2;
         int left = 0;
         int right = arrayLength - 1;
         // search peak
-        while (pitonicArray[left] <= pitonicArray[right]) {
-            if (pitonicArray 
+        while (biArray[left] <= biArray[right]) {
+            if (biArray 
         }
-        if (pitonicArray[mid] == target) return True;
+        if (biArray[mid] == target) return True;
         // search right
        
         // repeat 
