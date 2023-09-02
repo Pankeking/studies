@@ -19,12 +19,12 @@ public class PitonicSearch {
         int left = 0;
         int right = biArray.length - 1;
         while (left <= right) {
-            int mid = right / 2;
+            int mid = left + ((right - left) / 2);
             if (biArray[mid] < biArray[mid + 1]) {
                 left = mid;
             } else if (biArray[mid] < biArray[mid - 1]) {
                 right = mid;
-            }
+            } else 
         }
     }
 
