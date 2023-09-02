@@ -11,14 +11,23 @@ public class PitonicSearch {
             int number = StdIn.readInt();
             pitonicArray[i] = number;
         }
-        result = binarySearch(pitonicArray, target);
+
+        result = binarySearch(pitonicArray, peak, target);
+    }
+
+    private int binaryPeak(int[] pitonicArray) {
+        
     }
 
     private boolean binarySearch(int[] pitonicArray, int target) {
-        int mid = (pitonicArray.length - 1) / 2;
+        int arrayLength = pitonicArray.length;
+        int mid = (arrayLength - 1) / 2;
         int left = 0;
-        int right = pitonicArray.length - 1;
-        // search left
+        int right = arrayLength - 1;
+        // search peak
+        while (pitonicArray[left] <= pitonicArray[right]) {
+            if (pitonicArray 
+        }
         if (pitonicArray[mid] == target) return True;
         // search right
        
