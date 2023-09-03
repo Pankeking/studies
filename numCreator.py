@@ -1,6 +1,6 @@
 import random
-file_path = "80k_int.txt"
-number_qty = 80000
+number_qty = 8000
+file_path = f"{number_qty}_int.txt"
 
 numbers = (list(range(1, number_qty)))
 random.shuffle(numbers)

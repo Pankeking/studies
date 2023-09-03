@@ -1,19 +1,23 @@
 import random
-import math
-    
-arraySize = 200s
-file_path = f"pitonic{arraySize}Array.txt"
-peak_index = random.randint(0, arraySize - 1)
-print("Peak Index: ", peak_index)
-numbers_left = [math.floor(random.random() * peak_index) for _ in range (arraySize - peak_index)]
-numbers_right = [math.floor(random.random() * (arraySize - peak_index)) for _ in range (peak_index)]
-numbers_left.sort()
+maxValue = 2500000
+
+peak_left = random.randint(0, maxValue)
+start_left = random.randint(0, peak_left)
+numbers_left = sorted(range(start_left, peak_left))
+
+peak_right = random.randint(0, maxValue)
+start_right = random.randint(0, peak_right)
+numbers_right = (list(range(start_right, peak_right)))
+
+print(f"{peak_left} / {peak_right}")
+
 numbers_right.sort(reverse=True)
 numbers = numbers_left + numbers_right
+
+sampleSize = len(numbers)
+file_path = "bitonicArray.txt"
     
 with open(file_path, "w") as file:
-    file.write(f"{arraySize}\n\n")
+    file.write(f"{sampleSize}\n\n")
     file.write("\n".join(map(str, numbers)))
-    
-    
     
