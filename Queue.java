@@ -1,14 +1,14 @@
-public class Queue {
+public class Queue<Item> {
     
     private Node first = null;
     private Node last = null;
 
     private class Node {
-        String item;
+        Item item;
         Node next;
     }
 
-    public void enQueue(String item) {
+    public void enQueue(Item item) {
         Node oldLast = last;
         Node last = new Node();
         last.item = item;
@@ -17,8 +17,8 @@ public class Queue {
         else           oldLast.next = last;
     }
 
-    public String deQueue() {
-        String item = first.item;
+    public Item deQueue() {
+        Item item = first.item;
         first = first.next;
         if (isEmpty()) last = null;
         return item;
