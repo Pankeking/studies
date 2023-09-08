@@ -1,9 +1,9 @@
-public class LinkedList {
+public class LinkedList<Item> {
     
     private Node first = null;
 
     private class Node {
-        String item;
+        Item item;
         Node next;
     }
 
@@ -11,15 +11,15 @@ public class LinkedList {
         return first == null;
     }
 
-    public void push(String item) {
+    public void push(Item item) {
         Node oldFirst = first;
         first = new Node();
         first.item = item;
         first.next = oldFirst;
     }
 
-    public String pop() {
-        String item = first.item;
+    public Item pop() {
+        Item item = first.item;
         first = first.next;
         return item;
     }
