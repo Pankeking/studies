@@ -1,5 +1,7 @@
 import java.util.Iterator;
 
+import edu.princeton.cs.algs4.StdOut;
+
 public class Deque<Item> implements Iterable<Item> {
 
     private int dequeSize = 0;
@@ -96,6 +98,18 @@ public class Deque<Item> implements Iterable<Item> {
     }
     // unit testing (required)    
     public static void main(String[] args) {
+        Deque<Integer> test = new Deque<Integer>();
+        StdOut.println(test.size());
+        StdOut.println(test.isEmpty());
+        test.addFirst(2);
+        test.addFirst(3);
+        test.addLast(1);
+        StdOut.println(test.removeLast());
+        StdOut.println(test.removeFirst());
+        StdOut.println(test.size());
+        StdOut.println(test.removeLast());
+        StdOut.println(test.size());
+
 
     }
 
