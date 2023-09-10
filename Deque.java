@@ -39,6 +39,8 @@ public class Deque<Item> implements Iterable<Item> {
             Node oldFront = front;
             Node front = new Node();
             front.item = item;
+            oldFront.up = front;
+            front.down = oldFront;
         }
         dequeSize++;
     }
