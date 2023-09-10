@@ -20,11 +20,9 @@ public class Deque<Item> implements Iterable<Item> {
         front = new Node();
         back = new Node();
         front.up = null;
-        front.item = null;
         front.down = back;
         back.up = front;
         back.down = null;
-        back.item = null;
     }
 
     // is the deQueue empty?
@@ -40,15 +38,17 @@ public class Deque<Item> implements Iterable<Item> {
     // add item to the front
     public void addFirst(Item item) {
         if (item == null) throw new IllegalArgumentException();
+        Node oldFront = front;
+        front = new Node();
+        front.item = item;
+        front.up = null;
         if (isEmpty()) {
-            front.item = item;
             back = front;
-        } else {
-            Node oldFront = front;
-            Node front = new Node();
-            front.item = item;
-            oldFront.up = front;
+            back.down = null;
+        }
+        else {
             front.down = oldFront;
+            oldFront.up = front;
         }
         dequeSize++;
     }
@@ -61,7 +61,7 @@ public class Deque<Item> implements Iterable<Item> {
             front = back;
         } else {
             Node oldBack = back;
-            Node back = new Node();
+            back = new Node();
             back.item = item;
             oldBack.down = back;
             back.up = oldBack;
@@ -105,12 +105,14 @@ public class Deque<Item> implements Iterable<Item> {
         StdOut.println(test.isEmpty());
         test.addFirst(2);
         test.addFirst(3);
+        test.addFirst(4);
         test.addLast(1);
-        StdOut.println("r-last: " + test.removeLast());
-        StdOut.println("r-first: " + test.removeFirst());
-        StdOut.println("size: " + test.size());
-        StdOut.println("r-last: " + test.removeLast());
-        StdOut.println("size: " + test.size());
+        test.removeLast();
+        test.addFirst(5);
+        // test.addLast(1);
+        // StdOut.println("size: " + test.size());
+        // StdOut.println("r-last: " + test.removeLast());
+        // StdOut.println("size: " + test.size());
 
 
     }
