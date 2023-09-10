@@ -16,8 +16,8 @@ public class Deque<Item> implements Iterable<Item> {
         Node front = new Node();
         Node back = new Node();
         front.up = null;
-        front.down = null;
-        back.up = null;
+        front.down = back;
+        back.up = front;
         back.down = null;
     }
 
