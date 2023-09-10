@@ -17,8 +17,8 @@ public class Deque<Item> implements Iterable<Item> {
     
     // Construct an empty deque
     public Deque() {
-        Node front = new Node();
-        Node back = new Node();
+        front = new Node();
+        back = new Node();
         front.up = null;
         front.item = null;
         front.down = back;
@@ -106,11 +106,11 @@ public class Deque<Item> implements Iterable<Item> {
         test.addFirst(2);
         test.addFirst(3);
         test.addLast(1);
-        StdOut.println(test.removeLast());
-        StdOut.println(test.removeFirst());
-        StdOut.println(test.size());
-        StdOut.println(test.removeLast());
-        StdOut.println(test.size());
+        StdOut.println("r-last: " + test.removeLast());
+        StdOut.println("r-first: " + test.removeFirst());
+        StdOut.println("size: " + test.size());
+        StdOut.println("r-last: " + test.removeLast());
+        StdOut.println("size: " + test.size());
 
 
     }
