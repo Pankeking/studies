@@ -33,6 +33,13 @@ public class Deque<Item> implements Iterable<Item> {
 
     // add item to the front
     public void addFirst(Item item) {
+        if (front.item == null) {
+            front.item = item;
+        } else {
+            Node oldFront = front;
+            Node front = new Node();
+            front.item = item;
+        }
         dequeSize++;
     }
 
