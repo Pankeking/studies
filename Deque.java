@@ -15,6 +15,10 @@ public class Deque<Item> implements Iterable<Item> {
     public Deque() {
         Node front = new Node();
         Node back = new Node();
+        front.up = null;
+        front.down = null;
+        back.up = null;
+        back.down = null;
     }
 
     // is the deQueue empty?
