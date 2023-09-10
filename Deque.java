@@ -64,11 +64,17 @@ public class Deque<Item> implements Iterable<Item> {
     }
     // remove and return item from the front
     public Item removeFirst() {
+        if (isEmpty()) throw new java.util.NoSuchElementException();
+        Item item = front.item;
+        front = front.down;
         dequeSize--;
+        return item;
     }
     // remove and return item from the back
     public Item removeLast() {
+        if (isEmpty()) throw new java.util.NoSuchElementException();
         dequeSize--;
+        return item;
     }
     // return an iterator over items from front to back
     public Iterator<Item> iterator() {
