@@ -1,3 +1,5 @@
+import java.util.Iterator;
+
 public class Deque<Item> implements Iterable<Item> {
 
     private int dequeSize = 0;
