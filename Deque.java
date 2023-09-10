@@ -73,6 +73,8 @@ public class Deque<Item> implements Iterable<Item> {
     // remove and return item from the back
     public Item removeLast() {
         if (isEmpty()) throw new java.util.NoSuchElementException();
+        Item item = back.item;
+        back = back.up;
         dequeSize--;
         return item;
     }
