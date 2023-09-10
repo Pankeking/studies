@@ -33,7 +33,7 @@ public class Deque<Item> implements Iterable<Item> {
 
     // add item to the front
     public void addFirst(Item item) {
-        if (front.item == null) {
+        if (isEmpty()) {
             front.item = item;
         } else {
             Node oldFront = front;
@@ -47,6 +47,14 @@ public class Deque<Item> implements Iterable<Item> {
 
     // add item to the back
     public void addLast(Item item) {
+        if (isEmpty()) {
+            back.item = item;
+        } else {
+            Node oldBack = back;
+            Node back = new Node();
+            back.item = item;
+
+        }
         dequeSize++;
     }
     // remove and return item from the front
