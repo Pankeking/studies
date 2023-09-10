@@ -5,6 +5,13 @@ public class Deque<Item> implements Iterable<Item> {
     private Node front = null;
     private Node back = null;
 
+    private class Node {
+        Item item;
+        Node up;
+        Node down;
+    }
+    
+
     // Construct an empty deque
     public Deque() {
 
