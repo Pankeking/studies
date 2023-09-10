@@ -55,7 +55,8 @@ public class Deque<Item> implements Iterable<Item> {
             Node oldBack = back;
             Node back = new Node();
             back.item = item;
-
+            oldBack.down = back;
+            back.up = oldBack;
         }
         dequeSize++;
     }
