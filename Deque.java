@@ -33,6 +33,7 @@ public class Deque<Item> implements Iterable<Item> {
 
     // add item to the front
     public void addFirst(Item item) {
+        if (item == null) throw new IllegalArgumentException();
         if (isEmpty()) {
             front.item = item;
             back = front;
@@ -48,6 +49,7 @@ public class Deque<Item> implements Iterable<Item> {
 
     // add item to the back
     public void addLast(Item item) {
+        if (item == null) throw new IllegalArgumentException();
         if (isEmpty()) {
             back.item = item;
             front = back;
