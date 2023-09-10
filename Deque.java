@@ -1,5 +1,10 @@
 public class Deque<Item> implements Iterable<Item> {
 
+    private int dequeSize = 0;
+
+    private Node front = null;
+    private Node back = null;
+
     // Construct an empty deque
     public Deque() {
 
@@ -7,11 +12,11 @@ public class Deque<Item> implements Iterable<Item> {
 
     // is the deQueue empty?
     public boolean isEmpty() {
-
+        return dequeSize == 0;
     }
     // return the number of items in the deque
     public int size() {
-
+        return dequeSize;
     }
     // add item to the front
     public void addFirst(Item item) {
