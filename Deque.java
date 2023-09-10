@@ -20,9 +20,11 @@ public class Deque<Item> implements Iterable<Item> {
         Node front = new Node();
         Node back = new Node();
         front.up = null;
+        front.item = null;
         front.down = back;
         back.up = front;
         back.down = null;
+        back.item = null;
     }
 
     // is the deQueue empty?
