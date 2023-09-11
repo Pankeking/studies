@@ -108,7 +108,7 @@ public class Deque<Item> implements Iterable<Item> {
     }
     // unit testing (required)    
     public static void main(String[] args) {
-        Deque<Integer> test = new Deque<Integer>();
+        Deque<Integer> test = new Deque<>();
         StdOut.println(test.size());
         StdOut.println(test.isEmpty());
         test.addFirst(2);
