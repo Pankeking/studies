@@ -56,15 +56,15 @@ public class Deque<Item> implements Iterable<Item> {
     // add item to the back
     public void addLast(Item item) {
         if (item == null) throw new IllegalArgumentException();
+        Node oldBack = back;
+        back = new Node();
+        back.item = item;
         if (isEmpty()) {
-            back.item = item;
             front = back;
+            back.up = null;
         } else {
-            Node oldBack = back;
-            back = new Node();
-            back.item = item;
-            oldBack.down = back;
             back.up = oldBack;
+            oldBack.down = back;
         }
         dequeSize++;
     }
@@ -73,6 +73,10 @@ public class Deque<Item> implements Iterable<Item> {
         if (isEmpty()) throw new java.util.NoSuchElementException();
         Item item = front.item;
         front = front.down;
+        if (dequeSize == 1) {
+            front = null;
+            back = null;
+        }
         dequeSize--;
         return item;
     }
@@ -81,6 +85,10 @@ public class Deque<Item> implements Iterable<Item> {
         if (isEmpty()) throw new java.util.NoSuchElementException();
         Item item = back.item;
         back = back.up;
+        if (dequeSize == 1) {
+            back = null;
+            front = null;
+        }
         dequeSize--;
         return item;
     }
@@ -107,12 +115,29 @@ public class Deque<Item> implements Iterable<Item> {
         test.addFirst(3);
         test.addFirst(4);
         test.addLast(1);
-        test.removeLast();
         test.addFirst(5);
-        // test.addLast(1);
-        // StdOut.println("size: " + test.size());
+        test.addLast(10);
+        test.addLast(11);
+        StdOut.println("r-first: " + test.removeFirst());
+        StdOut.println("r-first: " + test.removeFirst());
+        StdOut.println("r-first: " + test.removeFirst());
+        StdOut.println("r-last: " + test.removeLast());
+        StdOut.println("size: " + test.size());
+        StdOut.println("r-last: " + test.removeLast());
+        StdOut.println("r-last: " + test.removeLast());
         // StdOut.println("r-last: " + test.removeLast());
-        // StdOut.println("size: " + test.size());
+        StdOut.println("r-first: " + test.removeFirst());
+        StdOut.println("size: " + test.size());
+        StdOut.println(test.front);
+        StdOut.println(test.back);
+        test.addFirst(2);
+        StdOut.println("r-first: " + test.removeFirst());
+        for (Integer item : test) {
+            StdOut.println(item);
+        }
+        StdOut.println(test.back);
+        StdOut.println("size: " + test.size());
+        
 
 
     }
