@@ -5,9 +5,13 @@ public class Permutation {
     public static void main(String[] args) {
         
         int k = Integer.parseInt(args[0]);
+        int j = 0;
         RandomizedQueue<String> randomizedQueue = new RandomizedQueue<>();
-        for (int i = 0; i < k; i++) {
-            randomizedQueue.enqueue(StdIn.readString());
+        while(!StdIn.isEmpty()) {
+            if (j < k) {
+                j++;
+                randomizedQueue.enqueue(StdIn.readString());
+            }
         }
         for (int i = 0; i < k; i++) {
             StdOut.println(randomizedQueue.dequeue());

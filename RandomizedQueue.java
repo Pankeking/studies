@@ -66,6 +66,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     
     private class RandomQueueIterator implements Iterator<Item> {
         private int current = 0;
+        private Item[] copy = 
         public boolean hasNext() { return current < size; }
         public Item next() {
             if (items[current] == null) throw new java.util.NoSuchElementException();
