@@ -72,6 +72,9 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
             current++;
             return item;
         }
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
     }
 
     public static void main(String[] args) {
