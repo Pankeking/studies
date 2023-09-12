@@ -23,7 +23,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     // add the item
-    public void enQueue(Item item) {
+    public void enqueue(Item item) {
         if (item == null) throw new IllegalArgumentException();
         if (size == items.length) resize(2 * items.length);
         items[size++] = item;
@@ -39,7 +39,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     // remove and return random item
-    public Item deQueue() {
+    public Item dequeue() {
         if (isEmpty()) throw new java.util.NoSuchElementException();
         // retrieve random item
         int randomIndex = StdRandom.uniformInt(size);
@@ -79,36 +79,36 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     public static void main(String[] args) {
         RandomizedQueue<Integer> test = new RandomizedQueue<>();
-        test.enQueue(1);
-        test.enQueue(2);
-        test.enQueue(3);
-        test.enQueue(4);
-        test.enQueue(5);
-        test.enQueue(6);
-        test.enQueue(7);
-        test.enQueue(8);
+        test.enqueue(1);
+        test.enqueue(2);
+        test.enqueue(3);
+        test.enqueue(4);
+        test.enqueue(5);
+        test.enqueue(6);
+        test.enqueue(7);
+        test.enqueue(8);
         for (Integer item : test) {
             StdOut.println(item);
         }
-        StdOut.println("deQueue: " + test.deQueue());
-        StdOut.println("deQueue: " + test.deQueue());
+        StdOut.println("dequeue: " + test.dequeue());
+        StdOut.println("dequeue: " + test.dequeue());
         Iterator<Integer> iterator = test.iterator();
         while (iterator.hasNext()) {
             int item = iterator.next();
             StdOut.println(item);
         }
         StdOut.println(test.size());
-        StdOut.println("deQueue: " + test.deQueue());
+        StdOut.println("dequeue: " + test.dequeue());
         StdOut.println("sample: " + test.sample());
-        StdOut.println("deQueue: " + test.deQueue());
-        StdOut.println("deQueue: " + test.deQueue());
-        StdOut.println("deQueue: " + test.deQueue());
-        StdOut.println("deQueue: " + test.deQueue());
+        StdOut.println("dequeue: " + test.dequeue());
+        StdOut.println("dequeue: " + test.dequeue());
+        StdOut.println("dequeue: " + test.dequeue());
+        StdOut.println("dequeue: " + test.dequeue());
         StdOut.println(test.isEmpty());
         StdOut.println("size: " + test.size());
-        StdOut.println("deQueue: " + test.deQueue());
+        StdOut.println("dequeue: " + test.dequeue());
         StdOut.println(test.isEmpty());
         StdOut.println("size: " + test.size());
-        StdOut.println("deQueue: " + test.deQueue());
+        StdOut.println("dequeue: " + test.dequeue());
     }
 }
