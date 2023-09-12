@@ -47,8 +47,9 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         int randomIndex = StdRandom.uniformInt(size);
         Item item = items[randomIndex];
         // last non-null item into retrieved item position
-        items[randomIndex] = items[--size]; 
-        items[size] = null;
+        items[randomIndex] = items[size - 1]; 
+        items[size - 1] = null;
+        size--;
         int length = items.length;
         if (size > 0 && size == length / 4) resize(length / 2);
         return item;
