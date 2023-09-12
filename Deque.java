@@ -149,7 +149,7 @@ public class Deque<Item> implements Iterable<Item> {
         test.addLast(102343);
         test.addLast(10244);
         Iterator<Integer> iterator = test.iterator();
-        while(iterator.hasNext()) {
+        while (iterator.hasNext()) {
             int item = iterator.next();
             StdOut.println(item);
         }
