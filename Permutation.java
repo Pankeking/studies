@@ -11,10 +11,13 @@ public class Permutation {
             if (j < k) {
                 j++;
                 randomizedQueue.enqueue(StdIn.readString());
+            } else {
+                StdIn.readString();
             }
         }
-        for (String s : randomizedQueue) {
-            StdOut.println(s);
+        for (int i = 0; i < k; i++) {
+            StdOut.println(randomizedQueue.dequeue());
         }
+        
     }
 }
