@@ -61,7 +61,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     // return an independent iterator over the items in random order
     public Iterator<Item> iterator() {
         
-        StdRandom.shuffle(copy);
+        StdRandom.shuffle(items);
         return new RandomQueueIterator();
     }
     
