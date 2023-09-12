@@ -59,6 +59,7 @@ public class Deque<Item> implements Iterable<Item> {
         Node oldBack = back;
         back = new Node();
         back.item = item;
+        back.down = null;
         if (isEmpty()) {
             front = back;
             back.up = null;
@@ -85,6 +86,7 @@ public class Deque<Item> implements Iterable<Item> {
         if (isEmpty()) throw new java.util.NoSuchElementException();
         Item item = back.item;
         back = back.up;
+        back.down = null;
         if (dequeSize == 1) {
             back = null;
             front = null;
@@ -130,7 +132,6 @@ public class Deque<Item> implements Iterable<Item> {
         StdOut.println("r-last: " + test.removeLast());
         StdOut.println("r-last: " + test.removeLast());
         // StdOut.println("r-last: " + test.removeLast());
-        StdOut.println("r-first: " + test.removeFirst());
         StdOut.println("size: " + test.size());
         StdOut.println(test.front);
         StdOut.println(test.back);
@@ -148,6 +149,13 @@ public class Deque<Item> implements Iterable<Item> {
         test.addLast(10);
         test.addLast(102343);
         test.addLast(10244);
+        test.removeLast();
+        test.removeLast();
+        test.removeLast();
+        test.removeLast();
+        test.removeLast();
+        test.removeLast();
+        test.removeLast();
         Iterator<Integer> iterator = test.iterator();
         while (iterator.hasNext()) {
             int item = iterator.next();
