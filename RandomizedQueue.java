@@ -44,7 +44,8 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         Item item = items[randomIndex];
         // last non-null item into retrieved item position
         items[randomIndex] = items[size]; 
-        items[--size] = null;
+        items[size] = null;
+        size--;
         if (size > 0 && size == items.length / 4) resize(items.length / 2);
         return item;
     }
@@ -57,21 +58,15 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     // return an independent iterator over the items in random order
     public Iterator<Item> iterator() {
+        StdRandom.shuffle(items, 0, size);
         return new RandomQueueIterator();
     }
     
     private class RandomQueueIterator implements Iterator<Item> {
         private int current = 0;
-
-        private Item[] iterableCopy = (Item[]) new Object[size]; {
-            for (int i = 0; i < size; i++) {
-                iterableCopy[i] = items[i];
-            }
-            StdRandom.shuffle(iterableCopy);
-        }
         public boolean hasNext() { return current < size; }
         public Item next() {
-            Item item = iterableCopy[current];
+            Item item = items[current];
             current++;
             return item;
         }
@@ -87,7 +82,14 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         for (Integer item : test) {
             StdOut.println(item);
         }
-
-        
+        StdOut.println("deQueue: " + test.deQueue());
+        // for (Integer item : test) {
+        //     StdOut.println(item);
+        // }
+        Iterator<Integer> iterator = test.iterator();
+        while (iterator.hasNext()) {
+            int item = iterator.next();
+            StdOut.println(item);
+        }
     }
 }
