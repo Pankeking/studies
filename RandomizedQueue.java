@@ -6,6 +6,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     private Item[] items;
     // private int arraySize;
+    private int current = 0;
     private int size = 0;
 
     public RandomizedQueue() {
@@ -62,11 +63,12 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     public Iterator<Item> iterator() {
         
         StdRandom.shuffle(items);
+        current = 0;
         return new RandomQueueIterator();
     }
     
     private class RandomQueueIterator implements Iterator<Item> {
-        private int current = 0;
+        
         
         public boolean hasNext() { return current < size; }
         public Item next() {
