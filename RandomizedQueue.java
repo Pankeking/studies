@@ -24,6 +24,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     // add the item
     public void enQueue(Item item) {
+        if (item == null) throw new IllegalArgumentException();
         if (size == items.length) resize(2 * items.length);
         items[size++] = item;
     }
@@ -39,6 +40,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     // remove and return random item
     public Item deQueue() {
+        if (isEmpty()) throw new java.util.NoSuchElementException();
         // retrieve random item
         int randomIndex = StdRandom.uniformInt(size);
         Item item = items[randomIndex];
@@ -51,6 +53,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     // return a random item without removing it
     public Item sample() {
+        if (isEmpty()) throw new java.util.NoSuchElementException();
         int randomIndex = StdRandom.uniformInt(size);
         return items[randomIndex];
     }
@@ -93,11 +96,16 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         }
         StdOut.println(test.size());
         StdOut.println("deQueue: " + test.deQueue());
-        StdOut.println("deQueue: " + test.deQueue());
+        StdOut.println("sample: " + test.sample());
         StdOut.println("deQueue: " + test.deQueue());
         StdOut.println("deQueue: " + test.deQueue());
         StdOut.println("deQueue: " + test.deQueue());
         StdOut.println("deQueue: " + test.deQueue());
         StdOut.println(test.isEmpty());
+        StdOut.println("size: " + test.size());
+        StdOut.println("deQueue: " + test.deQueue());
+        StdOut.println(test.isEmpty());
+        StdOut.println("size: " + test.size());
+        StdOut.println("deQueue: " + test.deQueue());
     }
 }
