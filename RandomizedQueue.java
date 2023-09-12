@@ -57,9 +57,27 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     // return an independent iterator over the items in random order
-    Iterator<Item> iterator() {
-
+    public Iterator<Item> iterator() {
+        return new RandomQueueIterator();
     }
+    
+    private class RandomQueueIterator implements Iterator<Item> {
+        private int current = 0;
+
+        private Item[] iterableCopy = (Item[]) new Object[size]; {
+            for (int i = 0; i < size; i++) {
+                iterableCopy[i] = items[i];
+            }
+            StdRandom.shuffle(iterableCopy);
+        }
+        public boolean hasNext() { return current < size; }
+        public Item next() {
+            Item item = iterableCopy[current];
+            current++;
+            return item;
+        }
+    }
+
     public static void main(String[] args) {
 
     }
