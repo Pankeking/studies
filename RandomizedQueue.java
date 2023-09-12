@@ -1,15 +1,16 @@
 import java.util.Iterator;
 import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.StdRandom;
 
 public class RandomizedQueue<Item> implements Iterable<Item> {
 
     private Item[] items;
-    private int arraySize;
+    // private int arraySize;
     private int size = 0;
     private Item item;
 
     public RandomizedQueue() {
-        items = (Item[]) new Object[0];
+        items = (Item[]) new Object[1];
     }
 
     // is the RandomizedQueue empty?
@@ -31,7 +32,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     // expand or shrink array
     private void resize(int capacity) {
         Item[] copy = (Item[]) new Object[capacity];
-        for (int i = 0; i < arraySize; i++) {
+        for (int i = 0; i < size; i++) {
             copy[i] = items[i];
         }
         items = copy;
@@ -39,15 +40,20 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     // remove and return random item
     public Item deQueue() {
-        Item item = items[size--];
-        items[size] = null; 
+        // retrieve random item
+        int randomIndex = StdRandom.uniformInt(size);
+        Item item = items[randomIndex];
+        // last non-null item into retrieved item position
+        items[randomIndex] = items[size]; 
+        items[--size] = null;
+        if (size > 0 && size == items.length / 4) resize(items.length / 2);
         return item;
     }
 
     // return a random item without removing it
     public Item sample() {
-        Item item = null;
-        return item;
+        int randomIndex = StdRandom.uniformInt(size);
+        return items[randomIndex];
     }
 
     // return an independent iterator over the items in random order
