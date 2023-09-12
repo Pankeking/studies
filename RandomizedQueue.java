@@ -66,17 +66,17 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     public Iterator<Item> iterator() {
         
         StdRandom.shuffle(items);
-        current = 0;
         return new RandomQueueIterator();
     }
     
     private class RandomQueueIterator implements Iterator<Item> {
         
-        
+        int current = 0;
         public boolean hasNext() { return current < size; }
         public Item next() {
             if (current >= size) throw new java.util.NoSuchElementException();
-            Item item = items[current++];
+            Item item = items[current];
+            current++;
             return item;
         }
         public void remove() {
