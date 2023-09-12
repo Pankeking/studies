@@ -104,9 +104,9 @@ public class Deque<Item> implements Iterable<Item> {
     private class DequeIterator implements Iterator<Item> {
         private Node current = front;
 
-        public boolean hasNext() { return current != null; }
+        public boolean hasNext() { return current.down != null; }
         public Item next() {
-            if (current.item == null) throw new java.util.NoSuchElementException();
+            if (current == null) throw new java.util.NoSuchElementException();
             Item item = current.item;
             current = current.down;
             return item;

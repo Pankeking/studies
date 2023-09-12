@@ -60,13 +60,14 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     // return an independent iterator over the items in random order
     public Iterator<Item> iterator() {
-        StdRandom.shuffle(items, 0, size);
+        
+        StdRandom.shuffle(copy);
         return new RandomQueueIterator();
     }
     
     private class RandomQueueIterator implements Iterator<Item> {
         private int current = 0;
-        private Item[] copy = 
+        
         public boolean hasNext() { return current < size; }
         public Item next() {
             if (items[current] == null) throw new java.util.NoSuchElementException();
