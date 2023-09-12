@@ -68,8 +68,8 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         private int current = 0;
         public boolean hasNext() { return current < size; }
         public Item next() {
-            Item item = items[current];
-            current++;
+            if (items[current] == null) throw new java.util.NoSuchElementException();
+            Item item = items[current++];
             return item;
         }
         public void remove() {
@@ -109,6 +109,5 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         StdOut.println("dequeue: " + test.dequeue());
         StdOut.println(test.isEmpty());
         StdOut.println("size: " + test.size());
-        StdOut.println("dequeue: " + test.dequeue());
     }
 }

@@ -101,9 +101,13 @@ public class Deque<Item> implements Iterable<Item> {
 
         public boolean hasNext() { return current != null; }
         public Item next() {
+            if (current.item == null) throw new java.util.NoSuchElementException();
             Item item = current.item;
             current = current.down;
             return item;
+        }
+        public void remove() {
+            throw new UnsupportedOperationException();
         }
     }
     // unit testing (required)    
