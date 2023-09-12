@@ -79,6 +79,13 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     public static void main(String[] args) {
+        RandomizedQueue<Integer> test = new RandomizedQueue<>();
+        test.enQueue(1);
+        test.enQueue(2);
+        test.enQueue(3);
+        test.enQueue(4);
+        test.enQueue(5);
 
+        
     }
 }
