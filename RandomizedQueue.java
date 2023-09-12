@@ -6,7 +6,6 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     private Item[] items;
     // private int arraySize;
-    private int current = 0;
     private int size = 0;
 
     public RandomizedQueue() {
@@ -28,7 +27,8 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         if (item == null) throw new IllegalArgumentException();
         int length = items.length;
         if (size == length) resize(2 * length);
-        items[size++] = item;
+        items[size] = item;
+        size++;
     }
 
     // expand or shrink array
@@ -47,7 +47,9 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         int randomIndex = StdRandom.uniformInt(size);
         Item item = items[randomIndex];
         // last non-null item into retrieved item position
-        items[randomIndex] = items[size - 1]; 
+        if (randomIndex != size - 1) {
+            items[randomIndex] = items[size - 1]; 
+        }
         items[size - 1] = null;
         size--;
         int length = items.length;
