@@ -7,7 +7,6 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     private Item[] items;
     // private int arraySize;
     private int size = 0;
-    private Item item;
 
     public RandomizedQueue() {
         items = (Item[]) new Object[1];
@@ -25,7 +24,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     // add the item
     public void enQueue(Item item) {
-        if (size > items.length) resize(2 * items.length);
+        if (size == items.length) resize(2 * items.length);
         items[size++] = item;
     }
 
@@ -85,6 +84,9 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         test.enQueue(3);
         test.enQueue(4);
         test.enQueue(5);
+        for (Integer item : test) {
+            StdOut.println(item);
+        }
 
         
     }
