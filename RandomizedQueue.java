@@ -26,7 +26,8 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     // add the item
     public void enqueue(Item item) {
         if (item == null) throw new IllegalArgumentException();
-        if (size == items.length) resize(2 * items.length);
+        int length = items.length;
+        if (size == length) resize(2 * length);
         items[size++] = item;
     }
 
