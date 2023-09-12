@@ -43,9 +43,8 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         int randomIndex = StdRandom.uniformInt(size);
         Item item = items[randomIndex];
         // last non-null item into retrieved item position
-        items[randomIndex] = items[size]; 
+        items[randomIndex] = items[--size]; 
         items[size] = null;
-        size--;
         if (size > 0 && size == items.length / 4) resize(items.length / 2);
         return item;
     }
@@ -79,13 +78,14 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         test.enQueue(3);
         test.enQueue(4);
         test.enQueue(5);
+        test.enQueue(6);
+        test.enQueue(7);
+        test.enQueue(8);
         for (Integer item : test) {
             StdOut.println(item);
         }
         StdOut.println("deQueue: " + test.deQueue());
-        // for (Integer item : test) {
-        //     StdOut.println(item);
-        // }
+        StdOut.println("deQueue: " + test.deQueue());
         Iterator<Integer> iterator = test.iterator();
         while (iterator.hasNext()) {
             int item = iterator.next();
