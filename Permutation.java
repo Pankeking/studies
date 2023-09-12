@@ -13,8 +13,8 @@ public class Permutation {
                 randomizedQueue.enqueue(StdIn.readString());
             }
         }
-        for (int i = 0; i < k; i++) {
-            StdOut.println(randomizedQueue.dequeue());
+        for (String s : randomizedQueue) {
+            StdOut.println(s);
         }
     }
 }
