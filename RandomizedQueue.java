@@ -48,7 +48,8 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         // last non-null item into retrieved item position
         items[randomIndex] = items[--size]; 
         items[size] = null;
-        if (size > 0 && size == items.length / 4) resize(items.length / 2);
+        int length = items.length;
+        if (size > 0 && size == length / 4) resize(length / 2);
         return item;
     }
 
@@ -72,7 +73,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         
         public boolean hasNext() { return current < size; }
         public Item next() {
-            if (items[current] == null) throw new java.util.NoSuchElementException();
+            if (current >= size) throw new java.util.NoSuchElementException();
             Item item = items[current++];
             return item;
         }
