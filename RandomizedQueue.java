@@ -12,6 +12,10 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         items = (Item[]) new Object[1];
     }
 
+    public int displayL() {
+        return items.length;
+    }
+
     // is the RandomizedQueue empty?
     public boolean isEmpty() {
         return size == 0;
@@ -67,7 +71,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     // return an independent iterator over the items in random order
     public Iterator<Item> iterator() {
         
-        StdRandom.shuffle(items);
+        StdRandom.shuffle(items, 0, size);
         return new RandomQueueIterator();
     }
     
