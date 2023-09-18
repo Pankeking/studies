@@ -1,4 +1,3 @@
-import edu.princeton.cs.algs4.Selection;
 import edu.princeton.cs.algs4.StdIn;
 
 public class SelectionSort implements Comparable<SelectionSort>{
@@ -20,7 +19,7 @@ public class SelectionSort implements Comparable<SelectionSort>{
         sort(arr);
     }
 
-    public static void sort(Comparable[] numbers) {
+    public static void sort(Comparable<SelectionSort>[] numbers) {
 
         int N = numbers.length;
         for (int i = 0; i < N; i++) {
@@ -31,13 +30,13 @@ public class SelectionSort implements Comparable<SelectionSort>{
             exch(numbers, i, min);
         }
     }
-    private static void exch(Comparable[] a, int i, int j) {
-        Comparable swap = a[i];
+    private static void exch(Comparable<SelectionSort>[] a, int i, int j) {
+        Comparable<SelectionSort> swap = a[i];
         a[i] = a[j];
         a[j] = swap;
     }
-    private static boolean less(Comparable v, Comparable w) {
-        return v.compareTo(w) < 0;
+    private static boolean less(Comparable<SelectionSort> v, Comparable<SelectionSort> w) {
+        return v.compareTo((SelectionSort) w) < 0;
     }
     @Override
     public int compareTo(SelectionSort other) {
