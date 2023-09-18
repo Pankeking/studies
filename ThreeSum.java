@@ -2,7 +2,7 @@ import java.util.Arrays;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
-// TODO foundTriplets array size?
+// TODO foundTriplets re-sizing array improve performance?
 
 public class ThreeSum {
     
