@@ -27,8 +27,17 @@ public class MergeSort implements Comparable<MergeSort> {
         
     }
 
+    private static void sort(Comparable<MergeSort>[] a, Comparable<MergeSort>[] aux, int lo, int hi) {
+        if (hi <= lo) return;
+        int mid = lo + (hi - lo) / 2;
+        sort(a, aux, lo, mid);
+        sort(a, aux, mid + 1, hi);
+        merge(a, aux, lo, mid, hi);
+    }
+
     public static void sort(Comparable<MergeSort>[] numbers) {
-        
+        MergeSort[] aux = new MergeSort[numbers.length];
+        sort(numbers, aux, 0, numbers.length - 1);
     }
     
     private static void merge(Comparable<MergeSort>[] a, Comparable<MergeSort>[] aux, int lo, int mid, int hi) {
