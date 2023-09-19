@@ -25,7 +25,7 @@ public class SelectionSort implements Comparable<SelectionSort>{
         // }
         Long endTime = System.nanoTime();
         long elapsedTime = (endTime - startTime) / 1_000_000; // Convert nanoseconds to milliseconds
-        StdOut.println("Elapsed time: " + elapsedTime);
+        StdOut.println("Selection sort elapsed time: " + elapsedTime);
     }
 
     public static void sort(Comparable<SelectionSort>[] numbers) {
