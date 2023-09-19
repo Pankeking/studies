@@ -1,4 +1,5 @@
 import sys
+import time
 
 def sort(arr):
     if len(arr) <= 1:
@@ -7,14 +8,15 @@ def sort(arr):
     mid = len(arr) // 2
     left_half = sort(arr[:mid])
     right_half = sort(arr[mid:])
-    merge(left_half, right_half)
+    
+    return merge(left_half, right_half)
     
 def merge(left,right):
     merged = []
     left_index = 0
     right_index = 0
     
-    while left_index < ln(left) and right_index < len(right):
+    while left_index < len(left) and right_index < len(right):
         if left[left_index] < right[right_index]:
             merged.append(left[left_index])
             left_index += 1
@@ -41,4 +43,10 @@ if len(sys.argv) != 2:
 file_path = sys.argv[1]
 numbers = read_file(file_path)
 
+start_time = time.time()
+
 sorted_numbers = sort(numbers)
+
+end_time = time.time()
+elapsed_time = (end_time - start_time) * 1000
+print(f"Python merge elapsed time: {int(elapsed_time)}")
