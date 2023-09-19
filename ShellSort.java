@@ -26,6 +26,7 @@ public class ShellSort implements Comparable<ShellSort> {
         StdOut.println("Shell sort elapsed time: " + elapsedTime);
         
     }
+    
     public static void sort(Comparable<ShellSort>[] numbers) {
         int N = numbers.length;
         int h = 1;

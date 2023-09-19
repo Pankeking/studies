@@ -1,9 +1,34 @@
+import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.StdOut;
+
 public class MergeSort implements Comparable<MergeSort> {
 
     private int value;
 
     public MergeSort(int value) {
         this.value = value;
+    }
+
+    public static void main(String[] args) {
+        int length = Integer.parseInt(args[0]);
+        MergeSort[] arr = new MergeSort[length];
+
+        int i = 0;
+        while(!StdIn.isEmpty()) {
+            int num = StdIn.readInt();
+            arr[i] = new MergeSort(num);
+            i++;
+        }
+        long startTime = System.nanoTime();
+        sort(arr);
+        Long endTime = System.nanoTime();
+        long elapsedTime = (endTime - startTime) / 1_000_000; // Convert nanoseconds to milliseconds
+        StdOut.println("Merge sort elapsed time: " + elapsedTime);
+        
+    }
+
+    public static void sort(Comparable<MergeSort>[] numbers) {
+        
     }
     
     private static void merge(Comparable<MergeSort>[] a, Comparable<MergeSort>[] aux, int lo, int mid, int hi) {
