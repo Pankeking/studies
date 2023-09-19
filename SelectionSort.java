@@ -11,7 +11,8 @@ public class SelectionSort implements Comparable<SelectionSort>{
     }
     public static void main(String[] args) {
 
-        SelectionSort[] arr = new SelectionSort[20];
+        int length = Integer.parseInt(args[0]);
+        SelectionSort[] arr = new SelectionSort[length];
         int i = 0;
         while (!StdIn.isEmpty()) {
             int num = StdIn.readInt();

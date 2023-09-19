@@ -1,5 +1,12 @@
 import random
-number_qty = 20
+import sys
+
+if len(sys.argv) != 2:
+    print("Usage: python numCreator.py <number>")
+    sys.exit(1)
+
+
+number_qty = int(sys.argv[1])
 file_path = f"{number_qty}_int.txt"
 
 numbers = (list(range(number_qty)))
