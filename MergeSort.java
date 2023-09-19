@@ -1,5 +1,3 @@
-import edu.princeton.cs.algs4.Merge;
-
 public class MergeSort implements Comparable<MergeSort> {
 
     private int value;
@@ -7,7 +5,6 @@ public class MergeSort implements Comparable<MergeSort> {
     public MergeSort(int value) {
         this.value = value;
     }
-    
     
     private static void merge(Comparable<MergeSort>[] a, Comparable<MergeSort>[] aux, int lo, int mid, int hi) {
         assert isSorted(a, lo, mid);    // precondition: a[lo..mid]       is sorted
@@ -28,6 +25,14 @@ public class MergeSort implements Comparable<MergeSort> {
         assert isSorted(a, lo, hi);  // postcondition: a[lo..hi] is sorted
     }
 
+    public static boolean isSorted(Comparable<MergeSort>[] a, int lo, int hi) {
+        for (int i = lo + 1; i <= hi; i++) {
+            if (less(a[i], a[i - 1])) {
+                return false;
+            }
+        }
+        return true;
+    }
     private static boolean less(Comparable<MergeSort> v, Comparable<MergeSort> w) {
         return v.compareTo((MergeSort) w) < 0;
     }
