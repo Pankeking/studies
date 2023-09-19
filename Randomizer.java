@@ -1,4 +1,5 @@
 import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdRandom;
 
 public class Randomizer {
@@ -13,6 +14,9 @@ public class Randomizer {
             i++;
         }
         shuffle(array);
+        for (Object element : array) {
+            StdOut.println(element);
+        }
     }
 
     public static void shuffle(Object[] a) {
