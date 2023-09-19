@@ -1,7 +1,21 @@
+import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdRandom;
 
 public class Randomizer {
-    public static void shuffle (Object[] a) {
+    
+
+    public static void main(String[] args) {
+        int size = Integer.parseInt(args[0]);
+        Object[] array = new Object[size];
+        int i = 0;
+        while(!StdIn.isEmpty()) {
+            array[i] = StdIn.readInt();
+            i++;
+        }
+        shuffle(array);
+    }
+
+    public static void shuffle(Object[] a) {
         int N = a.length;
 
         for (int i = 0; i < N; i++) {

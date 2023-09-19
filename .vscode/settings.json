@@ -2,5 +2,8 @@
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
         ".lift/algs4.jar"
+    ],
+    "cSpell.words": [
+        "Randomizer"
     ]
 }
