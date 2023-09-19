@@ -14,6 +14,7 @@ selection = f"&& java-algs4 SelectionSort {input_data}"
 insertion = f"&& java-algs4 Insertion {input_data}"
 shell = f"&& java-algs4 ShellSort {input_data}"
 merge = f"&& java-algs4 MergeSort {input_data}"
+b_up_merge = f"&& java-algs4 BottomUpMerge {input_data}"
 
-command = f"python numCreator.py {input_size} {init_state} {shell} {merge}"
+command = f"python numCreator.py {input_size} {init_state} {shell} {merge} + {b_up_merge}"
 os.system(command)
