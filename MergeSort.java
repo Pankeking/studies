@@ -56,7 +56,7 @@ public class MergeSort implements Comparable<MergeSort> {
             else if (less(aux[j], aux[i])) a[k] = aux[j++];
             else                           a[k] = aux[i++];  
         }
-        assert isSorted(a, lo, hi);  // postcondition: a[lo..hi] is sorted
+        assert isSorted(a, lo, hi);  // post condition: a[lo..hi] is sorted
     }
 
     public static boolean isSorted(Comparable<MergeSort>[] a, int lo, int hi) {
