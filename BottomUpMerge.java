@@ -27,19 +27,16 @@ public class BottomUpMerge implements Comparable<BottomUpMerge> {
         
     }
 
-    private static void sort(Comparable<BottomUpMerge>[] a, Comparable<BottomUpMerge>[] aux, int lo, int hi) {
-        if (hi <= lo) return;
-        int mid = lo + (hi - lo) / 2;
-        sort(a, aux, lo, mid);
-        sort(a, aux, mid + 1, hi);
-        merge(a, aux, lo, mid, hi);
+    private static void sort(Comparable<BottomUpMerge>[] a) {
+        int N = a.length;
+        BottomUpMerge[] aux = new BottomUpMerge[N];
+        for (int size = 1; size < N; size += size) {
+            for (int lo = 0; lo < N - size; lo += size + size) {
+                merge(a, aux, lo, lo + size - 1, Math.min(lo + size + size - 1, N - 1));
+            }
+        }
     }
 
-    public static void sort(Comparable<BottomUpMerge>[] numbers) {
-        BottomUpMerge[] aux = new BottomUpMerge[numbers.length];
-        sort(numbers, aux, 0, numbers.length - 1);
-    }
-    
     private static void merge(Comparable<BottomUpMerge>[] a, Comparable<BottomUpMerge>[] aux, int lo, int mid, int hi) {
         assert isSorted(a, lo, mid);    // precondition: a[lo..mid]       is sorted
         assert isSorted(a, mid + 1, hi); // precondition: a[mid + 1..hi]  is sorted
