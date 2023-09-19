@@ -14,12 +14,13 @@ public class SelectionSort implements Comparable<SelectionSort>{
         SelectionSort[] arr = new SelectionSort[20];
         int i = 0;
         while (!StdIn.isEmpty()) {
-            arr[i] = new SelectionSort(StdIn.readInt());
+            int num = StdIn.readInt();
+            arr[i] = new SelectionSort(num);
             i++;
         }
         sort(arr);
         for (SelectionSort element : arr) {
-            StdOut.println(element);
+            StdOut.println(element.value);
         }
     }
 
