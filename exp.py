@@ -1,9 +1,11 @@
-# number = 2
+import sys
 
-# for _ in range(30, 0, -1):
-#     print(number)
-#     number = number * 2
-    
+if len(sys.argv) != 3:
+    print("Usage: python exp.py <number> <exponent>")
+    sys.exit(1)
+
+number = int(sys.argv[1])
+exponent = int(sys.argv[2])
 def exponential(number, exp):
     if exp == 0:
         return 1
@@ -11,4 +13,4 @@ def exponential(number, exp):
         return number
     else:
         return exponential(number, exp - 1) * number
-print(exponential(9, 4))
+print(exponential(number, exponent))

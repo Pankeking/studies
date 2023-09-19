@@ -29,6 +29,8 @@ public class ShellSort implements Comparable<ShellSort> {
     public static void sort(Comparable<ShellSort>[] numbers) {
         int N = numbers.length;
         int h = 1;
+        // Shell sort is insertion sort by h positions
+        // H is determined as non trivial increment value
         while (h < N / 3) {
             h = 3 * h + 1;
         }
