@@ -20,9 +20,9 @@ public class SelectionSort implements Comparable<SelectionSort>{
             i++;
         }
         sort(arr);
-        for (SelectionSort element : arr) {
-            StdOut.println(element.value);
-        }
+        // for (SelectionSort element : arr) {
+        //     StdOut.println(element.value);
+        // }
         Long endTime = System.nanoTime();
         long elapsedTime = (endTime - startTime) / 1_000_000; // Convert nanoseconds to milliseconds
         StdOut.println("Elapsed time: " + elapsedTime);
