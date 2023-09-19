@@ -10,17 +10,17 @@ public class Insertion implements Comparable<Insertion> {
     }
 
     public static void main(String[] args) {
-        Long startTime = System.nanoTime();
         int length = Integer.parseInt(args[0]);
-
+        
         Insertion[] arr = new Insertion[length];
-
+        
         int i = 0;
         while (!StdIn.isEmpty()) {
             int num = StdIn.readInt();
             arr[i] = new Insertion(num);
             i++;
         }
+        long startTime = System.nanoTime();
         sort(arr);
         Long endTime = System.nanoTime();
         long elapsedTime = (endTime - startTime) / 1_000_000; // Convert nanoseconds to milliseconds

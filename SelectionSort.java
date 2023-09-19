@@ -10,7 +10,6 @@ public class SelectionSort implements Comparable<SelectionSort>{
 
     }
     public static void main(String[] args) {
-        Long startTime = System.nanoTime();
         int length = Integer.parseInt(args[0]);
         SelectionSort[] arr = new SelectionSort[length];
         int i = 0;
@@ -19,6 +18,7 @@ public class SelectionSort implements Comparable<SelectionSort>{
             arr[i] = new SelectionSort(num);
             i++;
         }
+        long startTime = System.nanoTime();
         sort(arr);
         // for (SelectionSort element : arr) {
         //     StdOut.println(element.value);
