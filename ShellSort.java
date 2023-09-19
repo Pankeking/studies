@@ -34,8 +34,22 @@ public class ShellSort implements Comparable<ShellSort> {
         while (h >= 1) {
             // h-sort the array
             for (int i = h; i < N; i++) {
-                for
+                for (int j = i; j >= h && less(numbers[j], numbers[j - h]); j -= h) {
+                    exch(numbers, j , j - h);
+                }
             }
+            h = h / 3;
         }
+    }
+    private static void exch(Comparable<ShellSort>[] a, int i, int j) {
+        Comparable<ShellSort> swap = a[i];
+        a[i] = a[j];
+        a[j] = swap;
+    }
+    private static boolean less(Comparable<ShellSort> v, Comparable<ShellSort> w) {
+        return v.compareTo((ShellSort) w) < 0;
+    }
+    public int compareTo(ShellSort other) {
+        return Integer.compare(this.value, other.value);
     }
 }
