@@ -1,3 +1,5 @@
+import sys
+
 def sort(arr):
     if len(arr) <= 1:
         return arr
@@ -24,3 +26,19 @@ def merge(left,right):
     merged.extend(right[right_index:])
     
     return merged
+
+def read_file(file_path):
+    numbers = []
+    with open(file_path, 'r') as file:
+        numbers.extend(int(line.strip()) for line in file)
+        
+    return numbers
+
+if len(sys.argv) != 2:
+    print("Usage: python merge_sort.py <input_file>")
+    sys.exit(1)
+
+file_path = sys.argv[1]
+numbers = read_file(file_path)
+
+sorted_numbers = sort(numbers)
