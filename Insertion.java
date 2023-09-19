@@ -25,10 +25,6 @@ public class Insertion implements Comparable<Insertion> {
         Long endTime = System.nanoTime();
         long elapsedTime = (endTime - startTime) / 1_000_000; // Convert nanoseconds to milliseconds
         StdOut.println("Elapsed time: " + elapsedTime);
-        // for (Insertion element: arr) {
-        //     StdOut.println(element.value);
-        // }
-
     }   
     
 
