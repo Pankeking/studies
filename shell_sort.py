@@ -24,6 +24,12 @@ def read_file(file_path)
     return numbers
 
 def sort(arr):
-    return
+    length = len(arr)
+    
+    h_sort = 0
+    while h_sort < length:
+        h_sort = h_sort * 3 + 1
+    
+    
 
 def
