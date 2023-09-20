@@ -49,4 +49,4 @@ sorted_numbers = sort(numbers)
 
 end_time = time.time()
 elapsed_time = (end_time - start_time) * 1000
-print(f"Python merge elapsed time: {int(elapsed_time)}")
+print(f"Python Merge sort: {int(elapsed_time)}ms")

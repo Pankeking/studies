@@ -14,7 +14,7 @@ def main():
     end_time = time.time()
     elapsed_time = (end_time - start_time) * 1000
 
-    print(f"Python shell elapsed time: {int(elapsed_time)}")
+    print(f"Python Shell sort: {int(elapsed_time)}ms")
 
 def read_file(file_path):
     numbers = []

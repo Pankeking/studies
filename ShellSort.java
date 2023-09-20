@@ -23,10 +23,10 @@ public class ShellSort implements Comparable<ShellSort> {
         sort(arr);
         Long endTime = System.nanoTime();
         long elapsedTime = (endTime - startTime) / 1_000_000; // Convert nanoseconds to milliseconds
-        StdOut.println("Shell sort elapsed time: " + elapsedTime);
-        for (ShellSort element : arr) {
-            StdOut.println(element.value);
-        }
+        StdOut.println("Java Shell sort: " + elapsedTime + "ms");
+        // for (ShellSort element : arr) {
+        //     StdOut.println(element.value);
+        // }
         
     }
     
