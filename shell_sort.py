@@ -1,4 +1,5 @@
 import sys
+import time
 
 if len(sys.argv) != 2:
     print("Usage: shell_sort.py <input_file>")
@@ -7,6 +8,14 @@ if len(sys.argv) != 2:
 file_path = sys.argv[1]
 
 numbers = read_file(file_path)
+
+start_time = time.time()
+sort(numbers)
+end_time = time.time()
+elapsed_time = (end_time - start_time) * 1000
+
+print(f"Python shell elapsed time: {int(elapsed_time)}")
+print(numbers)
 
 def read_file(file_path)
     numbers = []
