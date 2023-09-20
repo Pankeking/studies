@@ -24,26 +24,40 @@ public class ShellSort implements Comparable<ShellSort> {
         Long endTime = System.nanoTime();
         long elapsedTime = (endTime - startTime) / 1_000_000; // Convert nanoseconds to milliseconds
         StdOut.println("Shell sort elapsed time: " + elapsedTime);
+        for (ShellSort element : arr) {
+            StdOut.println(element.value);
+        }
         
     }
     
     public static void sort(Comparable<ShellSort>[] numbers) {
         int N = numbers.length;
-        int h = 1;
-        // Shell sort is insertion sort by h positions
-        // H is determined as non trivial increment value
-        while (h < N / 3) {
-            h = 3 * h + 1;
-        }
-        while (h >= 1) {
-            // h-sort the array
+        // // Shell sort is insertion sort by h positions
+        // // H is determined as non trivial increment value
+        for (int h = N / 3; h > 0; h /= 3) {
             for (int i = h; i < N; i++) {
                 for (int j = i; j >= h && less(numbers[j], numbers[j - h]); j -= h) {
                     exch(numbers, j , j - h);
                 }
             }
-            h = h / 3;
         }
+        // Shell Sort on while loop
+        // VVVVVVVVVVVVVVV
+        // VVVVVVVVVVVVVVV
+        // VVVVVVVVVVVVVVV
+        // int h = 1;
+        // while (h < N / 3) {
+        //     h = 3 * h + 1;
+        // }
+        // while (h >= 1) {
+        //     // h-sort the array
+        //     for (int i = h; i < N; i++) {
+        //         for (int j = i; j >= h && less(numbers[j], numbers[j - h]); j -= h) {
+        //             exch(numbers, j , j - h);
+        //         }
+        //     }
+        //     h = h / 3;
+        // }
     }
     private static void exch(Comparable<ShellSort>[] a, int i, int j) {
         Comparable<ShellSort> swap = a[i];
