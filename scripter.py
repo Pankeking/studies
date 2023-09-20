@@ -16,7 +16,8 @@ shell = f"&& java-algs4 ShellSort {input_size} < {input_file}"
 merge = f"&& java-algs4 MergeSort {input_size} < {input_file}"
 b_up_merge = f"&& java-algs4 BottomUpMerge {input_size} < {input_file}"
 
+python_shell = f"&& python shell_sort.py {input_file}"
 python_merge = f"&& python merge_sort.py {input_file}"
 
-command = f"python numCreator.py {input_size} {init_state} {shell} {merge} {b_up_merge} {python_merge}"
+command = f"python numCreator.py {input_size} {init_state} {shell} {merge} {b_up_merge} {python_merge} {python_shell}"
 os.system(command)
