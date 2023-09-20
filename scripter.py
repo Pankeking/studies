@@ -2,7 +2,7 @@ import os
 import sys
 
 if len(sys.argv) != 3:
-    print("Usage: scripter.py <amount> <shuffle || sorted>")
+    print("Usage: scripter.py <amount> <shuffled || sorted>")
     sys.exit(1)
     
 input_size = int(sys.argv[1])

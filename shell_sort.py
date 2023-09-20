@@ -25,6 +25,7 @@ def read_file(file_path):
 def sort(arr):
     length = len(arr)
     
+    # h positions to skip each iteration of h sort
     h_sort = 1
     while h_sort < length / 3:
         h_sort = 3 * h_sort + 1
