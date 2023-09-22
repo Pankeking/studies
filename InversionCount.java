@@ -3,6 +3,8 @@ import edu.princeton.cs.algs4.StdOut;
 
 public class InversionCount implements Comparable<InversionCount> {
 
+    private int value;
+
     public InversionCount(int value) {
         this.value = value;
     }
@@ -14,7 +16,7 @@ public class InversionCount implements Comparable<InversionCount> {
         int i = 0;
         while(!StdIn.isEmpty()) {
             int num = StdIn.readInt();
-            arr[i] = num;
+            arr[i] = new InversionCount(num);
             i++;
         }
         long startTime = System.nanoTime();
@@ -22,5 +24,16 @@ public class InversionCount implements Comparable<InversionCount> {
         long endTime = System.nanoTime();
         long elapsedTime = (endTime - startTime) / 1_000_000;
         StdOut.println("Inversion count: " + counter);
+    }
+
+    public int count(Comparable<InversionCount>[] numbers) {
+        
+    }
+
+    private static boolean less(Comparable<InversionCount> v, Comparable<InversionCount> w) {
+        return v.compareTo((InversionCount) w) < 0;
+    }
+    public int compareTo(InversionCount other) {
+        return Integer.compare(this.value, other.value);
     }
 }

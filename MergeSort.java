@@ -4,6 +4,7 @@ import edu.princeton.cs.algs4.StdOut;
 public class MergeSort implements Comparable<MergeSort> {
 
     private int value;
+    // private int inversionCount;
 
     public MergeSort(int value) {
         this.value = value;
@@ -12,6 +13,7 @@ public class MergeSort implements Comparable<MergeSort> {
     public static void main(String[] args) {
         int length = Integer.parseInt(args[0]);
         MergeSort[] arr = new MergeSort[length];
+
 
         int i = 0;
         while(!StdIn.isEmpty()) {
@@ -24,6 +26,7 @@ public class MergeSort implements Comparable<MergeSort> {
         Long endTime = System.nanoTime();
         long elapsedTime = (endTime - startTime) / 1_000_000; // Convert nanoseconds to milliseconds
         StdOut.println("Java Merge sort elapsed time: " + elapsedTime + "ms");
+        // StdOut.println(inversionCount);
         
     }
 
@@ -48,12 +51,16 @@ public class MergeSort implements Comparable<MergeSort> {
             aux[k] = a[k];
         }
 
+        // int inversionCount = 0;
         int i = lo;
         int j = mid + 1;
         for (int k = lo; k <= hi; k++) {
             if      (i > mid)              a[k] = aux[j++];
             else if (j > hi )              a[k] = aux[i++];
-            else if (less(aux[j], aux[i])) a[k] = aux[j++];
+            else if (less(aux[j], aux[i])) {
+                a[k] = aux[j++];
+                // inversionCount++;
+            }
             else                           a[k] = aux[i++];  
         }
         assert isSorted(a, lo, hi);  // post condition: a[lo..hi] is sorted
