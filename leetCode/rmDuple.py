@@ -3,18 +3,18 @@ def removeDuplicates(nums):
     :type nums: List[int]
     :rtype: int
     """
-    k = len(nums)
-    end = k - 1
-    current = k - 1
-    while current >= 2:
-        if nums[current] == nums[current - 2]:
-            nums[current], nums[end] = nums[end], nums[current] 
-            end -= 1
-            
-        current -= 1
+    i = 0
+    for num in nums:
+        if i < 2 or num > nums[i - 2]:
+            nums[i] = num
+            i += 1
+    print(i)
+    nums = nums[:i]
     print(nums)
-    return end + 1
-    
+    return i
 
-nums = [1,1,2,2,2,3,3,4]
+nums = [1,1,2,2,2,3,4,5]
 print(removeDuplicates(nums))
+print(nums)
+
+1,1,2,2,3,4,5,5
