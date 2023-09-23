@@ -7,5 +7,6 @@
         "algs",
         "Randomizer",
         "scripter"
-    ]
+    ],
+    "wolf.disableHotModeWarning": true
 }

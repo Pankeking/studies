@@ -35,7 +35,6 @@ def read_file(file_path):
         numbers.extend(int(line.strip()) for line in file)
         
     return numbers
-
 if len(sys.argv) != 2:
     print("Usage: python merge_sort.py <input_file>")
     sys.exit(1)
@@ -49,4 +48,4 @@ sorted_numbers = sort(numbers)
 
 end_time = time.time()
 elapsed_time = (end_time - start_time) * 1000
-print(f"Python Merge sort: {int(elapsed_time)}ms")
+print(f"Python Merge Sort: {int(elapsed_time)}ms")
