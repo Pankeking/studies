@@ -50,7 +50,7 @@ public class Point implements Comparable<Point> {
      */
     public double slopeTo(Point that) {
         if (this.compareTo(that) == 0) {
-            return -1;
+            return Double.NEGATIVE_INFINITY;
         }
         double deltaY = that.y - this.y;
         double deltaX = that.x - this.x;
@@ -58,7 +58,7 @@ public class Point implements Comparable<Point> {
             return 0;
         }
         else if (deltaX == 0) {
-            return 1;
+            return Double.POSITIVE_INFINITY;
         } 
         else {
             return deltaY / deltaX;
