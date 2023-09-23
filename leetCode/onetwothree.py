@@ -7,33 +7,6 @@ return array sorted
 def swap(arr, i, j):
     arr[i], arr[j] = arr[j], arr[i]
     
-'''
-def sort(arr):
-    lo = 0
-    mid = 0
-    hi = len(array) - 1
-    trash = len(array) - 1
-    
-    example = [0, 0 ,1 ,1, 1, 2, 2, "trash"]
-    lo = 2
-    mid = 5
-    hi = -3
-    trash = -1
-    while mid < hi:
-        if arr[mid] == 0:
-            swap(arr, lo, mid)
-            lo += 1
-            mid += 1
-        elif arr[mid] == 1:
-            mid += 1
-        elif arr[mid] == 2:
-            swap(arr, mid, hi)
-            hi -= 1
-        else:
-            swap(arr, mid, trash)
-            trash -= 1
-            
-'''
 def sort(arr):    
     lo = 0
     mid = 0
