@@ -67,6 +67,19 @@ public class Point implements Comparable<Point> {
      */
     public int compareTo(Point that) {
         /* YOUR CODE HERE */
+        int compY = Integer.compare(this.y, that.y);
+        if (compY < 0) {
+            return -1;
+        } else if (compY > 0) {
+            return 1;
+        } else {
+            int compX = Integer.compare(this.x, that.x);
+            if (compX < 0) {
+                return -1;
+            } else if (compX > 0) {
+                return 1;
+            }
+        }
         return 0;
     }
 
