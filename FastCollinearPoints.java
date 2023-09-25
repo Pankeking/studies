@@ -1,17 +1,64 @@
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Stack;
+
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdDraw;
 import edu.princeton.cs.algs4.StdOut;
 
 public class FastCollinearPoints {
-    public FastCollinearPoints(Point[] points) {    // finds all line segments containing 4 or more points
 
-    }    
+    private LineSegment[] lineSeg;
+    private int numberOfSeg = 0;
+
+    public FastCollinearPoints(Point[] points) {    // finds all line segments containing 4 or more points
+        checkNullPoints(points);
+        int length = points.length;
+        Stack<LineSegment> fastStack = new Stack<LineSegment>();
+        Point[] copy = new Point[length];
+        copy = points;
+        // Iterate every point as origin and sort by slopes
+        for (int i = 0; i < length - 3; i++) {
+            Comparator<Point> tmpComp = points[i].slopeOrder();
+            Arrays.sort(copy, tmpComp);
+            for (int j = i + 1; j < length; j++) {
+                double slopeJ = points[i].slopeTo(copy[j]);
+                double slopeK = points[i].slopeTo(copy[j + 1]);
+                double slopeL = points[i].slopeTo(copy[j + 2]);
+                if (slopeJ == slopeK && slopeJ == slopeL) {
+                    for (int k = j + 2; points[i].slopeTo(copy[k]) != slopeJ; k++) {
+                        slopeL = points[i].slopeTo(copy[k]);
+                        j = k;
+                    }
+                    fastStack.push(new LineSegment(points[i], copy[j]));
+                    numberOfSeg++;
+                }
+            }
+        }
+
+        lineSeg = new LineSegment[numberOfSeg];
+        for (int i = 0; i < numberOfSeg; i++) {
+            lineSeg[i] = fastStack.pop();
+        }
+        
+    }   
+
+    private void checkNullPoints(Point[] points) {
+        if (points == null) throw new IllegalArgumentException();
+        for (int i = 0; i < points.length; i++) {
+            if (points[i] == null) throw new IllegalArgumentException();
+        }    
+    }
+
     public           int numberOfSegments()    {    // the number of line segments
-        return 0;
-    }    
+        return numberOfSeg;
+    }
+
     public LineSegment[] segments()            {    // the line segments
-        return null;
+        return lineSeg;
     }    
+
+
 
     public static void main(String[] args) {
 

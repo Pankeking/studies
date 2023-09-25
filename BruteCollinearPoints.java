@@ -11,9 +11,10 @@ public class BruteCollinearPoints {
     private int numberOfSeg = 0;
     
     public BruteCollinearPoints(Point[] points) {   // finds all line segments containing 4 points
+        checkNullPoints(points);
         int length = points.length;
         Arrays.sort(points);
-        Stack<LineSegment> Lstack = new Stack<LineSegment>();
+        Stack<LineSegment> bruteStack = new Stack<LineSegment>();
         for (int i = 0; i < length - 3; i++) {
             for (int j = i + 1; j < length - 2; j++) {
                 double slopeJ = points[i].slopeTo(points[j]);
@@ -26,7 +27,7 @@ public class BruteCollinearPoints {
                         double slopeL = points[i].slopeTo(points[l]);
                         
                         if (slopeJ == slopeK && slopeK == slopeL) {
-                            Lstack.push(new LineSegment(points[i], points[l]));
+                            bruteStack.push(new LineSegment(points[i], points[l]));
                             numberOfSeg++;
                             StdOut.println(numberOfSeg);
                         }
@@ -37,9 +38,16 @@ public class BruteCollinearPoints {
         StdOut.println(numberOfSeg);
         lineSeg = new LineSegment[numberOfSeg];
         for (int i = 0; i < numberOfSeg; i++) {
-            lineSeg[i] = Lstack.pop();
+            lineSeg[i] = bruteStack.pop();
         }
     }   
+
+    private void checkNullPoints(Point[] points) {
+        if (points == null) throw new IllegalArgumentException();
+        for (int i = 0; i < points.length; i++) {
+            if (points[i] == null) throw new IllegalArgumentException();
+        }    
+    }
 
     public int numberOfSegments() {                 // the number of line segments
         return numberOfSeg;
