@@ -18,6 +18,9 @@ public class FastCollinearPoints {
         Point[] copy = new Point[length];
         // Iterate every point as origin and sort by slopes
         for (int i = 0; i < length - 3; i++) {
+            if (i < 10) {
+                StdOut.println(String.format("\npoints[%d]: %s\n",i, points[i].toString()));
+            }
             copy = points;
             Comparator<Point> tmpComp = points[i].slopeOrder();
             Arrays.sort(copy, tmpComp);
@@ -35,6 +38,10 @@ public class FastCollinearPoints {
                     StdOut.println(lineSegment);
                     fastStack.push(lineSegment);
                     numberOfSeg++;
+                }
+                if ( i< 10) {
+
+                    StdOut.println(String.format("slopeJ: %.2f  / slopeK: %.2f  / slopeL: %.2f",slopeJ, slopeK, slopeL));
                 }
             }
         }
