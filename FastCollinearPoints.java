@@ -16,13 +16,17 @@ public class FastCollinearPoints {
         int length = points.length;
         Stack<LineSegment> fastStack = new Stack<LineSegment>();
         Point[] copy = new Point[length];
+        Arrays.sort(points);
+        for (int i = 0; i < length; i++) {
+            copy[i] = points[i];
+        }
         // Iterate every point as origin and sort by slopes
         for (int i = 0; i < length - 3; i++) {
             if (i < 10) {
                 StdOut.println(String.format("\npoints[%d]: %s\n",i, points[i].toString()));
             }
-            copy = points;
             Comparator<Point> tmpComp = points[i].slopeOrder();
+            // mergeSort(copy, tmpComp);
             Arrays.sort(copy, tmpComp);
             for (int j = i + 1; j < length - 2; j++) {
                 double slopeJ = points[i].slopeTo(copy[j]);
@@ -58,6 +62,24 @@ public class FastCollinearPoints {
         for (int i = 0; i < points.length; i++) {
             if (points[i] == null) throw new IllegalArgumentException();
         }    
+    }
+
+    private static void mergeSort(Point[] points, Point[] aux, int lo, int hi, Comparator<Point> comparator) {
+        int length = points.length;
+        if (hi <= lo) return;
+        int mid = lo + (hi - lo) / 2;
+        mergeSort(points, aux, lo, mid, comparator);
+        mergeSort(points, aux, lo, mid, comparator);
+        merge(points, aux, lo, mid, hi, comparator);
+    }
+
+    public static void mergeSort(Point[] points, Comparator<Point> comparator) {
+        Point[] aux = new Point[points.length];
+        mergeSort(points, aux, 0, points.length - 1,comparator);
+    }
+
+    private static void merge(Point[] points, Point[] aux, int lo, int mid, int hi, Comparator<Point> comparator) {
+
     }
 
     public           int numberOfSegments()    {    // the number of line segments
