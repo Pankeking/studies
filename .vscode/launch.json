@@ -6,6 +6,14 @@
     "configurations": [
         {
             "type": "java",
+            "name": "FastCollinearPoints",
+            "request": "launch",
+            "mainClass": "FastCollinearPoints",
+            "projectName": "hello_2fc43e85",
+            "args": "collinear/input50.txt"
+        },
+        {
+            "type": "java",
             "name": "BruteCollinearPoints",
             "request": "launch",
             "mainClass": "BruteCollinearPoints",

@@ -16,21 +16,24 @@ public class FastCollinearPoints {
         int length = points.length;
         Stack<LineSegment> fastStack = new Stack<LineSegment>();
         Point[] copy = new Point[length];
-        copy = points;
         // Iterate every point as origin and sort by slopes
         for (int i = 0; i < length - 3; i++) {
+            copy = points;
             Comparator<Point> tmpComp = points[i].slopeOrder();
             Arrays.sort(copy, tmpComp);
-            for (int j = i + 1; j < length; j++) {
+            for (int j = i + 1; j < length - 2; j++) {
                 double slopeJ = points[i].slopeTo(copy[j]);
                 double slopeK = points[i].slopeTo(copy[j + 1]);
                 double slopeL = points[i].slopeTo(copy[j + 2]);
                 if (slopeJ == slopeK && slopeJ == slopeL) {
-                    for (int k = j + 2; points[i].slopeTo(copy[k]) != slopeJ; k++) {
-                        slopeL = points[i].slopeTo(copy[k]);
-                        j = k;
-                    }
-                    fastStack.push(new LineSegment(points[i], copy[j]));
+                    // for (int k = j + 2; points[i].slopeTo(copy[k]) != slopeJ; k++) {
+                    //     slopeL = points[i].slopeTo(copy[k]);
+                    //     j = k;
+                    // }
+                    LineSegment lineSegment = new LineSegment(points[i],copy[j + 2]);
+                    // fastStack.push(new LineSegment(points[i], copy[j]));
+                    StdOut.println(lineSegment);
+                    fastStack.push(lineSegment);
                     numberOfSeg++;
                 }
             }
