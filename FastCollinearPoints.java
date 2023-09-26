@@ -65,11 +65,10 @@ public class FastCollinearPoints {
     }
 
     private static void mergeSort(Point[] points, Point[] aux, int lo, int hi, Comparator<Point> comparator) {
-        int length = points.length;
         if (hi <= lo) return;
         int mid = lo + (hi - lo) / 2;
         mergeSort(points, aux, lo, mid, comparator);
-        mergeSort(points, aux, lo, mid, comparator);
+        mergeSort(points, aux, mid + 1, hi, comparator);
         merge(points, aux, lo, mid, hi, comparator);
     }
 
@@ -79,7 +78,18 @@ public class FastCollinearPoints {
     }
 
     private static void merge(Point[] points, Point[] aux, int lo, int mid, int hi, Comparator<Point> comparator) {
+        for (int k = lo; k <= hi; k++) {
+            aux[k] = points[k];
+        }
 
+        int i = lo;
+        int j = mid + 1;
+        for (int k = lo; k <= hi; k++) {
+            if      (i > mid)                                points[k] = aux[j++];
+            else if (j > hi )                                points[k] = aux[i++];
+            else if (comparator.compare(aux[j], aux[i]) < 0) points[k] = aux[j++];
+            else                                             points[k] = aux[i++];
+        }
     }
 
     public           int numberOfSegments()    {    // the number of line segments
