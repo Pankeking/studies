@@ -16,34 +16,40 @@
             int length = points.length;
             Stack<LineSegment> fastStack = new Stack<LineSegment>();
             Point[] copy = new Point[length];
+            Point[] aux = new Point[3];
             for (int i = 0; i < length; i++) {
                 copy[i] = points[i];
             }
             Arrays.sort(copy);
             // Iterate every point as origin and sort by slopes
-            for (int i = 0; i < length - 3; i++) {
+            for (int i = 0; i < length; i++) {
                 Point origin = points[i];
                 Comparator<Point> slopeComparator = origin.slopeOrder();
                 mergeSort(copy, slopeComparator);
-                // Arrays.sort(copy, tmpComp);
                 for (int j = 1; j < length - 2; j++) {
                     double slopeJ = origin.slopeTo(copy[j]);
                     double slopeK = origin.slopeTo(copy[j + 1]);
                     double slopeL = origin.slopeTo(copy[j + 2]);
                     if (slopeJ == slopeK && slopeJ == slopeL) {
-                        int l = j + 2;
-                        for (int k = l; slopeL != slopeJ; k++) {
+                        aux[0] = copy[j];
+                        aux[1] = copy[j + 1];
+                        Point maxPoint = copy[j + 2];
+                        for (int k = j + 2; k < length; k++) {
                             slopeL = origin.slopeTo(copy[k]);
-                            l = k;
+                            if (slopeL == slopeJ) {
+                                maxPoint = copy[k];
+                                j = k;
+                            }
                         }
-                        LineSegment lineSegment = new LineSegment(origin,copy[l]);
-                        // StdOut.println(lineSegment);
-                        fastStack.push(lineSegment);
-                        numberOfSeg++;
-                    }
-                    if ( i< 10) {
-
-                        StdOut.println(String.format("slopeJ: %.2f  / slopeK: %.2f  / slopeL: %.2f",slopeJ, slopeK, slopeL));
+                        aux[2] = maxPoint;
+                        Arrays.sort(aux);
+                        if (origin.compareTo(aux[0]) < 0) {
+                            LineSegment lineSegment = new LineSegment(origin,aux[2]);
+                            StdOut.println("added: " + lineSegment);
+                            fastStack.push(lineSegment);
+                            numberOfSeg++;
+                        }
+                        
                     }
                 }
             }
@@ -124,7 +130,7 @@
         // print and draw the line segments
         FastCollinearPoints collinear = new FastCollinearPoints(points);
         for (LineSegment segment : collinear.segments()) {
-            StdOut.println(segment);
+            // StdOut.println(segment);
             segment.draw();
         }
         StdDraw.show();
