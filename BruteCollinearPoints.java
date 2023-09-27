@@ -22,12 +22,12 @@ public class BruteCollinearPoints {
                 for (int k = j + 1; k < length - 1; k++) {
                     double slopeK = points[i].slopeTo(points[k]);
                     
-                    for (int l = k + 1; l < length; l++) {
+                    for (int p = k + 1; p < length; p++) {
                         if (slopeJ != slopeK) break;
-                        double slopeL = points[i].slopeTo(points[l]);
+                        double slopeP = points[i].slopeTo(points[p]);
                         
-                        if (slopeJ == slopeK && slopeK == slopeL) {
-                            bruteStack.push(new LineSegment(points[i], points[l]));
+                        if (slopeJ == slopeK && slopeK == slopeP) {
+                            bruteStack.push(new LineSegment(points[i], points[p]));
                             numberOfSeg++;
                         }
                     }
@@ -78,7 +78,7 @@ public class BruteCollinearPoints {
     StdDraw.show();
     
     // StdDraw.setPenRadius(0.01);
-    StdDraw.setPenColor(50,120,200);
+    StdDraw.setPenColor(50, 120, 200);
     // print and draw the line segments
     BruteCollinearPoints collinear = new BruteCollinearPoints(points);
     for (LineSegment segment : collinear.segments()) {

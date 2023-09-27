@@ -1,10 +1,10 @@
     import java.util.Arrays;
     import java.util.Comparator;
-    import java.util.Stack;
-
+    
+    import edu.princeton.cs.algs4.Stack;
     import edu.princeton.cs.algs4.In;
     import edu.princeton.cs.algs4.StdDraw;
-    import edu.princeton.cs.algs4.StdOut;
+    // import edu.princeton.cs.algs4.StdOut;
 
     public class FastCollinearPoints {
 
@@ -16,7 +16,7 @@
             int length = points.length;
             Stack<LineSegment> fastStack = new Stack<LineSegment>();
             Point[] copy = new Point[length];
-            Point[] aux = new Point[3];
+            Point[] miniAux = new Point[3];
             for (int i = 0; i < length; i++) {
                 copy[i] = points[i];
             }
@@ -25,27 +25,27 @@
             for (int i = 0; i < length; i++) {
                 Point origin = points[i];
                 Comparator<Point> slopeComparator = origin.slopeOrder();
-                mergeSort(copy, slopeComparator);
+                mergeSortStart(copy, slopeComparator);
                 for (int j = 1; j < length - 2; j++) {
                     double slopeJ = origin.slopeTo(copy[j]);
                     double slopeK = origin.slopeTo(copy[j + 1]);
-                    double slopeL = origin.slopeTo(copy[j + 2]);
-                    if (slopeJ == slopeK && slopeJ == slopeL) {
-                        aux[0] = copy[j];
-                        aux[1] = copy[j + 1];
+                    double slopeP = origin.slopeTo(copy[j + 2]);
+                    if (slopeJ == slopeK && slopeJ == slopeP) {
+                        miniAux[0] = copy[j];
+                        miniAux[1] = copy[j + 1];
                         Point maxPoint = copy[j + 2];
                         for (int k = j + 2; k < length; k++) {
-                            slopeL = origin.slopeTo(copy[k]);
-                            if (slopeL == slopeJ) {
+                            slopeP = origin.slopeTo(copy[k]);
+                            if (slopeP == slopeJ) {
                                 maxPoint = copy[k];
                                 j = k;
                             }
                         }
-                        aux[2] = maxPoint;
-                        Arrays.sort(aux);
-                        if (origin.compareTo(aux[0]) < 0) {
-                            LineSegment lineSegment = new LineSegment(origin,aux[2]);
-                            StdOut.println("added: " + lineSegment);
+                        miniAux[2] = maxPoint;
+                        Arrays.sort(miniAux);
+                        if (origin.compareTo(miniAux[0]) < 0) {
+                            LineSegment lineSegment = new LineSegment(origin, miniAux[2]);
+                            // StdOut.println("added: " + lineSegment);
                             fastStack.push(lineSegment);
                             numberOfSeg++;
                         }
@@ -76,7 +76,7 @@
             merge(points, aux, lo, mid, hi, slopeComparator);
         }
 
-        public static void mergeSort(Point[] points, Comparator<Point> slopeComparator) {
+        private static void mergeSortStart(Point[] points, Comparator<Point> slopeComparator) {
             Point[] aux = new Point[points.length];
             mergeSort(points, aux, 0, points.length - 1, slopeComparator);
         }
@@ -90,7 +90,7 @@
             int j = mid + 1;
             for (int k = lo; k <= hi; k++) {
                 if      (i > mid)                                points[k] = aux[j++];
-                else if (j > hi )                                points[k] = aux[i++];
+                else if (j > hi)                                points[k] = aux[i++];
                 else if (slopeComparator.compare(aux[j], aux[i]) < 0) points[k] = aux[j++];
                 else                                             points[k] = aux[i++];
             }
