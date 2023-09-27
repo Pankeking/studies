@@ -5,6 +5,7 @@
     import edu.princeton.cs.algs4.In;
     import edu.princeton.cs.algs4.StdDraw;
     // import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.StdOut;
 
     public class FastCollinearPoints {
 
@@ -26,7 +27,7 @@
                 Point origin = points[i];
                 Comparator<Point> slopeComparator = origin.slopeOrder();
                 mergeSortStart(copy, slopeComparator);
-                for (int j = 1; j < length - 2; j++) {
+                for (int j = 0; j < length - 2; j++) {
                     double slopeJ = origin.slopeTo(copy[j]);
                     double slopeK = origin.slopeTo(copy[j + 1]);
                     double slopeP = origin.slopeTo(copy[j + 2]);
@@ -42,6 +43,7 @@
                             }
                         }
                         miniAux[2] = maxPoint;
+                        // mergeSortStart(miniAux, slopeComparator);
                         Arrays.sort(miniAux);
                         if (origin.compareTo(miniAux[0]) < 0) {
                             LineSegment lineSegment = new LineSegment(origin, miniAux[2]);
@@ -101,7 +103,8 @@
         }
 
         public LineSegment[] segments()            {    // the line segments
-            return lineSeg;
+            LineSegment[] copy = lineSeg;
+            return copy;
         }    
 
 
@@ -133,6 +136,7 @@
             // StdOut.println(segment);
             segment.draw();
         }
+        StdOut.println(collinear.numberOfSegments());
         StdDraw.show();
     }
     }

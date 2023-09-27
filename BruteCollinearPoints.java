@@ -52,7 +52,8 @@ public class BruteCollinearPoints {
     }   
 
     public LineSegment[] segments() {               // the line segments
-        return lineSeg;
+        LineSegment[] copy = lineSeg;
+        return copy;
     }   
 
     public static void main(String[] args) {
