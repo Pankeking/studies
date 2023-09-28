@@ -4,8 +4,6 @@
     import edu.princeton.cs.algs4.Stack;
     import edu.princeton.cs.algs4.In;
     import edu.princeton.cs.algs4.StdDraw;
-    // import edu.princeton.cs.algs4.StdOut;
-import edu.princeton.cs.algs4.StdOut;
 
     public class FastCollinearPoints {
 
@@ -21,13 +19,15 @@ import edu.princeton.cs.algs4.StdOut;
             for (int i = 0; i < length; i++) {
                 copy[i] = points[i];
             }
-            Arrays.sort(copy);
+            // Arrays.sort(points);
             // Iterate every point as origin and sort by slopes
             for (int i = 0; i < length; i++) {
-                Point origin = points[i];
+                Arrays.sort(copy);
+                Point origin = copy[i];
                 Comparator<Point> slopeComparator = origin.slopeOrder();
                 mergeSortStart(copy, slopeComparator);
                 for (int j = 0; j < length - 2; j++) {
+                    // if (origin.compareTo(copy[j]) > 0) continue;
                     double slopeJ = origin.slopeTo(copy[j]);
                     double slopeK = origin.slopeTo(copy[j + 1]);
                     double slopeP = origin.slopeTo(copy[j + 2]);
@@ -35,18 +35,19 @@ import edu.princeton.cs.algs4.StdOut;
                         miniAux[0] = copy[j];
                         miniAux[1] = copy[j + 1];
                         Point maxPoint = copy[j + 2];
-                        for (int k = j + 2; k < length; k++) {
+                        for (int k = j + 3; k < length; k++) {
                             slopeP = origin.slopeTo(copy[k]);
                             if (slopeP == slopeJ) {
                                 maxPoint = copy[k];
                                 j = k;
+                            } else {
+                                break;
                             }
                         }
                         miniAux[2] = maxPoint;
-                        // mergeSortStart(miniAux, slopeComparator);
                         Arrays.sort(miniAux);
                         if (origin.compareTo(miniAux[0]) < 0) {
-                            LineSegment lineSegment = new LineSegment(origin, miniAux[2]);
+                            LineSegment lineSegment = new LineSegment(origin, maxPoint);
                             // StdOut.println("added: " + lineSegment);
                             fastStack.push(lineSegment);
                             numberOfSeg++;
@@ -136,7 +137,6 @@ import edu.princeton.cs.algs4.StdOut;
             // StdOut.println(segment);
             segment.draw();
         }
-        StdOut.println(collinear.numberOfSegments());
         StdDraw.show();
     }
     }
