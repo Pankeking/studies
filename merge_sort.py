@@ -33,8 +33,8 @@ def read_file(file_path):
     numbers = []
     with open(file_path, 'r') as file:
         numbers.extend(int(line.strip()) for line in file)
-        
     return numbers
+        
 if len(sys.argv) != 2:
     print("Usage: python merge_sort.py <input_file>")
     sys.exit(1)

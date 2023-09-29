@@ -1,3 +1,5 @@
+import time
+import sys
 
 class Solution(object):
     def sort(self, nums, low, high):
@@ -22,14 +24,27 @@ class Solution(object):
         self.sort(nums, low, lowest - 1)
         self.sort(nums, greatest + 1, high)
         
-        
+    def read_file(self, file_path):
+        numbers = []
+        with open(file_path, 'r') as file:
+            numbers.extend(int(line.strip()) for line in file)
+        return numbers
+
+
+if len(sys.argv) != 2:
+    print("Usage: python 3waydijkstra.py <input_file>")
+    sys.exit(1)
+    
+file_path = sys.argv[1]
 
 test = Solution()
+numbers = test.read_file(file_path)
 
-testNums = [3, 7, 11, 2, 9, 4, 12]        
-test.sort(testNums, 0, len(testNums) - 1)
-print(testNums)
+start_time = time.time()
 
-test1 = [0,0,0,1,1,1]
-test.sort(test1, 0, len(test1) - 1)
-print(test1)
+test.sort(numbers, 0, len(numbers) - 1)
+
+end_time = time.time()
+elapsed_time = (end_time - start_time) * 1000
+
+print(f"Python 3-way Dijkstra's Quick Sort: {int(elapsed_time)}ms")
