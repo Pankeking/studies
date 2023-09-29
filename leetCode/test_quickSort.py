@@ -1,5 +1,5 @@
 import pytest
-from leetCode.quickSort import Solution
+from quickSort import Solution
 
 class TestQuickSort:
     @pytest.mark.parametrize(

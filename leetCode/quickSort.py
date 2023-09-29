@@ -41,6 +41,6 @@ testNums = [3, 7, 11, 2, 9, 4, 12]
 test.quickSort(testNums)
 print(testNums)
 
-test1 = [1,1,1,1]
+test1 = [0,0,0,1,1,1]
 test.quickSort(test1)
 print(test1)
