@@ -26,7 +26,6 @@ public class MergeSort implements Comparable<MergeSort> {
         Long endTime = System.nanoTime();
         long elapsedTime = (endTime - startTime) / 1_000_000; // Convert nanoseconds to milliseconds
         StdOut.println("Java Merge sort elapsed time: " + elapsedTime + "ms");
-        // StdOut.println(inversionCount);
         
     }
 
