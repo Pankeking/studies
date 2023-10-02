@@ -4,7 +4,7 @@ class ListNode:
         self.val = val
         self.next = next
 class Solution:
-    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+    def addTwoNumbers(self, l1: [ListNode], l2: [ListNode]) -> [ListNode]:
         current = l1
         num1 = 0
         digit = 1
@@ -26,6 +26,9 @@ class Solution:
             digit = num % 10
             num //= 10
             current.val = digit
-            current = current.next
+            current.next = ListNode()
         return head
         
+        
+test = Solution()
+test.addTwoNumbers
