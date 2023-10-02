@@ -1,32 +1,52 @@
 public class MaxPQ<Key extends Comparable<Key>> {
     // private int N;
-    private Key[] prioQueue;
-    private int value;
+    private Key[] priorityQueue;
     private int size = 0;
     
+
+
     public MaxPQ() {
         // Create an empty priority queue
-        prioQueue = (Key[])  new Object[2];
+        priorityQueue = (Key[])  new Object[2];
     }
+    //
+    // Basic Ops
+    //
+    public boolean isEmpty() {
+        return size == 0;
+    } 
+    public int size() {
+        return size;
+    }
+    
+    
+    // 
+    // Heap OPS
+    //
     public void insert(Key x) {
-        // insert a key into the priority queue
-        int length = prioQueue.length - 1;
+        int length = priorityQueue.length - 1;
         if (size > 0 && size == length) resize(length * 2);
-        prioQueue[++size] = x;
+        
+        // insert a key into the priority queue
+        priorityQueue[++size] = x;
         swim(size);
     }
+
     public Key delMax() {
         // return and remove the largest key
-        Key max = prioQueue[1];
-        swap(1, N--);
-        Key key = null;
-        return key;
+        if (isEmpty()) throw new IllegalStateException("Priority queue is empty");
+    
+        Key max = priorityQueue[1];
+        swap(1, size--);
+
+        int length = priorityQueue.length - 1;
+        if (size > 0 && size <= length / 4) resize(length / 2);
+
+        sink(1);
+        priorityQueue[size+1] = null;
+        return max;
     }
-
-    // 
-    //BASIC OPS
-    //
-
+    
     private void sink(int k) {
         while (k*2 <= size) {
             int j = k * 2;
@@ -48,24 +68,26 @@ public class MaxPQ<Key extends Comparable<Key>> {
     // Helper Functions
     //
     private void swap(int v, int q) {
-        Key tmp = prioQueue[v];
-        prioQueue[v] = prioQueue[q];
-        prioQueue[q] = tmp;
+        Key tmp = priorityQueue[v];
+        priorityQueue[v] = priorityQueue[q];
+        priorityQueue[q] = tmp;
     }
     private boolean less(int v, int w) {
         if (v == w) return false;
-        return v.compareTo((Key) w) < 0;
+        return priorityQueue[v].compareTo((Key) priorityQueue[w]) < 0;
     }
-    private int compareTo(Key other) {
-        return Integer.compare(this.value, that.value);
-    }
+
+    // private int compareTo(Key other) {
+    //     return Integer.compare(this.value, other.value);
+    // }
+
     private void resize(int capacity) {
         Key[] copy = (Key[]) new Object[capacity];
         for (int i = 1; i < size; i++) {
-            if (prioQueue[i] != null) {
-                copy[i] = prioQueue[i];
+            if (priorityQueue[i] != null) {
+                copy[i] = priorityQueue[i];
             }
         }
-        prioQueue = copy;
+        priorityQueue = copy;
     }
 }
