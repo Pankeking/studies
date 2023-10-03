@@ -31,6 +31,10 @@ public class Board {
         for (int i = 0; i < size; i++) {
             sb.append(" ");
             for (int j = 0; j < size; j++) {
+                if (size >= 10) {
+                    sb.append(" ");
+                    if (board[i][j] / size == 0) sb.append(" ");
+                }
                 sb.append(board[i][j] + " ");
             }
             sb.append("\n");
@@ -202,7 +206,7 @@ public class Board {
             {4,5,6},
             {7,8,0}
         };
-        Board board = new Board(tiles2);
+        Board board = new Board(tiles);
         Board equalBoard = new Board(tiles3);
         String sBoard = board.toString();
         int size = board.dimension();
@@ -211,6 +215,7 @@ public class Board {
         boolean equality = board.equals(equalBoard);
         boolean goal = board.isGoal();
         Iterable<Board> neighbors = board.neighbors();
+        Board twin = board.twin();
         StdOut.println(sBoard);
         StdOut.println("\n\n\nsize: " + size);
         StdOut.println("hamming: " + hamming);
@@ -218,9 +223,11 @@ public class Board {
         StdOut.println("equals: " + equality);
         StdOut.println("Goal: " + goal);
         for (Board nextMove : neighbors) {
-            StdOut.println("\n\n\n");
+            StdOut.println("\n");
             StdOut.println(nextMove.toString());
         }
+        StdOut.println("original: " + board.toString());
+        StdOut.println("twin: " + twin.toString());
     }
 
 }
