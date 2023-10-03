@@ -53,12 +53,22 @@ public class Board {
         int count = 0;
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                if (board[i][j] != 0) {
-                    int correct = (i * size) + j + 1;
-                    int diff = abs(correct - board[i][j]);
-                    int y = diff / size;
-                    int x = diff % size;
-                    count += x + y;
+                int correct = (i * size) + j + 1;
+                if (board[i][j] != 0 && board[i][j] != correct) {
+                    int mBoard = board[i][j] % size;
+                    int dBoard = board[i][j] / size;
+                    int mCorrect = correct % size;
+                    int dCorrect = correct / size;
+
+                    int x1 = mBoard == 0 ? size : mBoard;
+                    int x2 = mCorrect == 0 ? size : mCorrect;
+                    int deltaX = abs(x1 - x2);
+
+                    int y1 = mBoard == 0 ? dBoard - 1 : dBoard;
+                    int y2 = mCorrect == 0 ? dCorrect - 1 : dCorrect;
+                    int deltaY = abs(y1 -y2);
+
+                    count += deltaX + deltaY;
                 }
             }
         }
@@ -101,7 +111,11 @@ public class Board {
                 tiles[i][j] = in.readInt();
             }
         }
-                
+        int[][] tiles2 = {
+            {8,1,3},
+            {4,0,2},
+            {7,6,5}
+        };
         Board board = new Board(tiles);
         String sBoard = board.toString();
         int size = board.dimension();
