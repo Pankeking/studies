@@ -3,7 +3,7 @@ import edu.princeton.cs.algs4.StdOut;
 
 public class Board {
 
-    private int N;
+    private int size;
     private int[][] board;
     // create a board from an n-by-n array of tiles,
     // where tiles[row][col] = tile at (row, col)
@@ -14,16 +14,16 @@ public class Board {
                 throw new IllegalArgumentException("Not n-by-n dimensions");
             }
         }
-        N = tiles.length;
+        size = tiles.length;
         board = tiles;
     }
     // string representation of this board
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(N + "\n");
-        for (int i = 0; i < N; i++) {
+        sb.append(size + "\n");
+        for (int i = 0; i < size; i++) {
             sb.append(" ");
-            for (int j = 0; j < N; j++) {
+            for (int j = 0; j < size; j++) {
                 sb.append(board[i][j] + " ");
             }
             sb.append("\n");
@@ -33,17 +33,36 @@ public class Board {
 
     // board dimension n
     public int dimension() {
-        return N;
+        return size;
     }
 
     // number of tiles out of place
     public int hamming() {
-        return -1;
+        int hamming = 0;
+        for (int i = 0; i < size; i++) 
+            for (int j = 0; j < size; j++) {
+                if (board[i][j] != ((i * size) + j + 1) && board[i][j] != 0) {
+                    hamming += 1;
+                }
+            }
+        return hamming;
     }
 
     // sum of Manhattan distances between tiles and goal
     public int manhattan() {
-        return -1;
+        int count = 0;
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if (board[i][j] != 0) {
+                    int correct = (i * size) + j + 1;
+                    int diff = abs(correct - board[i][j]);
+                    int y = diff / size;
+                    int x = diff % size;
+                    count += x + y;
+                }
+            }
+        }
+        return count;
     }
 
     // is this board the goal board?
@@ -66,6 +85,11 @@ public class Board {
         return null;
     }
 
+    // Helper absolute function
+    private int abs(int k) {
+        return k >= 0 ? k : -k;
+    }
+
     // unit testing (not graded)
     public static void main(String[] args) {
         
@@ -80,8 +104,13 @@ public class Board {
                 
         Board board = new Board(tiles);
         String sBoard = board.toString();
+        int size = board.dimension();
+        int hamming = board.hamming();
+        int manhattan = board.manhattan();
         StdOut.println(sBoard);
-        
+        StdOut.println("\n\n\nsize: " + size);
+        StdOut.println("hamming: " + hamming);
+        StdOut.println("manhattan: " + manhattan);
     }
 
 }
