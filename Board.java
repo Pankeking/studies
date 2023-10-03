@@ -3,6 +3,7 @@ import java.util.Arrays;
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.Stack;
 import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.StdRandom;
 
 public class Board {
 
@@ -153,7 +154,9 @@ public class Board {
 
     // a board that is obtained by exchanging any pair of tiles
     public Board twin() {
-        return null;
+        int[][] twin = deepCopy(board);
+        swap(twin, StdRandom.uniformInt(size), StdRandom.uniformInt(size), StdRandom.uniformInt(size), StdRandom.uniformInt(size));
+        return new Board(twin);
     }
 
     // Helper functions
@@ -207,14 +210,14 @@ public class Board {
         int manhattan = board.manhattan();
         boolean equality = board.equals(equalBoard);
         boolean goal = board.isGoal();
-        Iterable<Board> neighbours = board.neighbors();
+        Iterable<Board> neighbors = board.neighbors();
         StdOut.println(sBoard);
         StdOut.println("\n\n\nsize: " + size);
         StdOut.println("hamming: " + hamming);
         StdOut.println("manhattan: " + manhattan);
         StdOut.println("equals: " + equality);
         StdOut.println("Goal: " + goal);
-        for (Board nextMove : neighbours) {
+        for (Board nextMove : neighbors) {
             StdOut.println("\n\n\n");
             StdOut.println(nextMove.toString());
         }
