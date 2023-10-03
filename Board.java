@@ -1,4 +1,7 @@
+import java.util.Arrays;
+
 import edu.princeton.cs.algs4.In;
+import edu.princeton.cs.algs4.Stack;
 import edu.princeton.cs.algs4.StdOut;
 
 public class Board {
@@ -113,7 +116,39 @@ public class Board {
 
     // all neighboring boards
     public Iterable<Board> neighbors() {
-        return null;
+        Stack<Board> boardStack = new Stack<Board>(); 
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if (board[i][j] == 0) {
+                    if (i != 0) {
+                        int[][] copyUp = deepCopy(board);
+                        swap(copyUp, i, j, i-1, j);
+                        Board upBoard = new Board(copyUp);
+                        boardStack.push(upBoard);
+                    }
+                    if (i != size - 1) {
+                        int[][] copyDown = deepCopy(board);
+                        swap(copyDown, i, j, i+1, j);
+                        Board downBoard = new Board(copyDown);
+                        boardStack.push(downBoard);
+                    }
+                    if (j != 0) {
+                        int[][] copyLeft = deepCopy(board);
+                        swap(copyLeft, i, j, i, j-1);
+                        Board leftBoard = new Board(copyLeft);
+                        boardStack.push(leftBoard);
+                    }
+                    if (j != size - 1) {
+                        int[][] copyRight = deepCopy(board);
+                        swap(copyRight, i, j, i, j+1);
+                        Board rightBoard = new Board(copyRight);
+                        boardStack.push(rightBoard);
+                    }
+                    return boardStack;
+                }
+            }
+        }
+        return boardStack;
     }
 
     // a board that is obtained by exchanging any pair of tiles
@@ -121,9 +156,21 @@ public class Board {
         return null;
     }
 
-    // Helper absolute function
+    // Helper functions
     private int abs(int k) {
         return k >= 0 ? k : -k;
+    }
+    private void swap(int[][] swapBoard, int y, int x, int dy, int dx) {
+        int tmp = swapBoard[y][x];
+        swapBoard[y][x] = swapBoard[dy][dx];
+        swapBoard[dy][dx] = tmp;
+    }
+    private int[][] deepCopy(int[][] baseBoard) {
+        int[][] copyBoard = new int[baseBoard.length][];
+        for (int i = 0; i < baseBoard.length; i++) {
+            copyBoard[i] = Arrays.copyOf(baseBoard[i], baseBoard[i].length);
+        }
+        return copyBoard;
     }
 
     // unit testing (not graded)
@@ -152,7 +199,7 @@ public class Board {
             {4,5,6},
             {7,8,0}
         };
-        Board board = new Board(tiles4);
+        Board board = new Board(tiles2);
         Board equalBoard = new Board(tiles3);
         String sBoard = board.toString();
         int size = board.dimension();
@@ -160,12 +207,17 @@ public class Board {
         int manhattan = board.manhattan();
         boolean equality = board.equals(equalBoard);
         boolean goal = board.isGoal();
+        Iterable<Board> neighbours = board.neighbors();
         StdOut.println(sBoard);
         StdOut.println("\n\n\nsize: " + size);
         StdOut.println("hamming: " + hamming);
         StdOut.println("manhattan: " + manhattan);
         StdOut.println("equals: " + equality);
         StdOut.println("Goal: " + goal);
+        for (Board nextMove : neighbours) {
+            StdOut.println("\n\n\n");
+            StdOut.println(nextMove.toString());
+        }
     }
 
 }
