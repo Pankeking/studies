@@ -57,7 +57,9 @@ public class Solver {
                 break;
             }
             if (currentTwin.board.isGoal()) {
+                solutionNode = twinNode;
                 solutionNode.moves = -1;
+                break;
             }
             Iterable<Board> boards = currentNode.board.neighbors();
             for (Board board : boards) {
