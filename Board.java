@@ -159,7 +159,19 @@ public class Board {
     // a board that is obtained by exchanging any pair of tiles
     public Board twin() {
         int[][] twin = deepCopy(board);
-        swap(twin, StdRandom.uniformInt(size), StdRandom.uniformInt(size), StdRandom.uniformInt(size), StdRandom.uniformInt(size));
+        int x = StdRandom.uniformInt(size);
+        int y = StdRandom.uniformInt(size);
+        int dx = StdRandom.uniformInt(size);
+        int dy = StdRandom.uniformInt(size);
+        while (twin[y][x] == 0) {
+            x = StdRandom.uniformInt(size);
+            y = StdRandom.uniformInt(size);
+        }
+        while (twin[dy][dx] == 0) {
+            dx = StdRandom.uniformInt(size);
+            dy = StdRandom.uniformInt(size);
+        }
+        swap(twin, y, x, dy, dx);
         return new Board(twin);
     }
 

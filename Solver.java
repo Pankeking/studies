@@ -18,6 +18,10 @@ public class Solver {
         initialNode.moves = 0;
         MinPQ<SearchNode> priorityQ = new MinPQ<SearchNode>();
         priorityQ.insert(initialNode);
+        while (!priorityQ.isEmpty()) {
+            SearchNode currentNode = priorityQ.delMin();
+            Iterable<Board> boards = currentNode.board.neighbors();       
+        }
     }
 
     // is the initial board solvable? (see below)
