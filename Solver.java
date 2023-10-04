@@ -1,18 +1,23 @@
 import edu.princeton.cs.algs4.In;
+import edu.princeton.cs.algs4.MinPQ;
 import edu.princeton.cs.algs4.StdOut;
 
 public class Solver {
 
     private class SearchNode {
         Board board;
-        Board prev = null;
+        Board prev;
         int moves;
     }
 
     // find a solution to the initial board (using the A* algorithm)
     public Solver(Board initial) {
-        SearchNode currentNode = new SearchNode();
-        currentNode.board = initial;
+        SearchNode initialNode = new SearchNode();
+        initialNode.board = initial;
+        initialNode.prev = null;
+        initialNode.moves = 0;
+        MinPQ<SearchNode> priorityQ = new MinPQ<SearchNode>();
+        priorityQ.insert(initialNode);
     }
 
     // is the initial board solvable? (see below)
