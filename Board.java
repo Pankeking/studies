@@ -161,18 +161,25 @@ public class Board {
         int[][] twin = deepCopy(board);
         int x = StdRandom.uniformInt(size);
         int y = StdRandom.uniformInt(size);
-        int dx = StdRandom.uniformInt(size);
-        int dy = StdRandom.uniformInt(size);
         while (twin[y][x] == 0) {
             x = StdRandom.uniformInt(size);
             y = StdRandom.uniformInt(size);
         }
-        while (twin[dy][dx] == 0) {
-            dx = StdRandom.uniformInt(size);
-            dy = StdRandom.uniformInt(size);
+        if (x > 0 && twin[y][x-1] != 0) {
+            swap(twin, y, x, y, x-1);
+            return new Board(twin);
+        } else if (x < size - 1 && twin[y][x+1] != 0) {
+            swap(twin, y, x, y, x+1);
+            return new Board(twin);
+        } else if (y > 0 && twin[y-1][x] != 0) {
+            swap(twin, y, x, y-1, x);
+            return new Board(twin);
+        } else if (y < size - 1 && twin[y+1][x] != 0) {
+            swap(twin, y, x, y + 1, x);
+            return new Board(twin);
         }
-        swap(twin, y, x, dy, dx);
-        return new Board(twin);
+        
+        return null;
     }
 
     // Helper functions
@@ -203,31 +210,15 @@ public class Board {
                 tiles[i][j] = in.readInt();
             }
         }
-        int[][] tiles2 = {
-            {8,1,3},
-            {4,0,2},
-            {7,6,5}
-        };
-        int[][] tiles3 = {
-            {8,1,3},
-            {4,0,2},
-            {7,6,5}
-        };
-        int[][] tiles4 = {
-            {1,2,3},
-            {4,5,6},
-            {7,8,0}
-        };
         Board board = new Board(tiles);
-        Board equalBoard = new Board(tiles3);
+        Board twin = board.twin();
         String sBoard = board.toString();
         int size = board.dimension();
         int hamming = board.hamming();
         int manhattan = board.manhattan();
-        boolean equality = board.equals(equalBoard);
+        boolean equality = board.equals(twin);
         boolean goal = board.isGoal();
         Iterable<Board> neighbors = board.neighbors();
-        Board twin = board.twin();
         StdOut.println(sBoard);
         StdOut.println("\n\n\nsize: " + size);
         StdOut.println("hamming: " + hamming);

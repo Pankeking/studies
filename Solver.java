@@ -15,12 +15,12 @@ public class Solver {
     }
     private SearchNode solutionNode;
     private class SearchNodeComparator implements Comparator<SearchNode> {
-        public int compare(SearchNode one, SearchNode two) {
-            int manhattan1 = one.manhattan + one.moves;
-            int manhattan2 = two.manhattan + two.moves;
-            int compare = Integer.compare(manhattan1, manhattan2);
+        public int compare(SearchNode that, SearchNode other) {
+            int manhattanThat = that.manhattan + that.moves;
+            int manhattanOther = other.manhattan + other.moves;
+            int compare = Integer.compare(manhattanThat, manhattanOther);
             if (compare == 0) {
-                return Integer.compare(one.manhattan, two.manhattan);
+                return Integer.compare(that.manhattan, other.manhattan);
             }
             return compare;
         }
