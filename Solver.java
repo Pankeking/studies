@@ -2,15 +2,17 @@ import java.util.Comparator;
 
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.MinPQ;
+import edu.princeton.cs.algs4.Stack;
 import edu.princeton.cs.algs4.StdOut;
 
 public class Solver {
 
     private class SearchNode {
         Board board;
-        Board prev;
+        SearchNode prev;
         int moves;
     }
+    private SearchNode solutionNode;
     private class SearchNodeComparator implements Comparator<SearchNode> {
         public int compare(SearchNode one, SearchNode two) {
             int manhattan1 = one.board.manhattan() + one.moves;
@@ -34,11 +36,15 @@ public class Solver {
         priorityQ.insert(initialNode);
         while (!priorityQ.isEmpty()) {
             SearchNode currentNode = priorityQ.delMin();
+            if (currentNode.board.isGoal()) {
+                solutionNode = currentNode;
+                break;
+            }
             Iterable<Board> boards = currentNode.board.neighbors();
             for (Board board : boards) {
                 SearchNode newSearchNode = new SearchNode();
                 newSearchNode.board = board;
-                newSearchNode.prev = currentNode.board;
+                newSearchNode.prev = currentNode;
                 newSearchNode.moves = currentNode.moves + 1;
                 priorityQ.insert(newSearchNode);
             } 
@@ -57,7 +63,13 @@ public class Solver {
 
     // sequence of boards in a shortest solution; null if unsolvable
     public Iterable<Board> solution() {
-        return null;
+        Stack<Board> solvedStack = new Stack<Board>();
+        SearchNode currentSolutionNode = solutionNode;
+        while (currentSolutionNode.prev != null) {
+            solvedStack.push(currentSolutionNode.board);
+            currentSolutionNode = currentSolutionNode.prev;
+        }
+        return solvedStack;
     }
 
     // test client (see below) 
