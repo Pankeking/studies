@@ -53,19 +53,19 @@ public class Solver {
 
     // is the initial board solvable? (see below)
     public boolean isSolvable() {
-        return false;
+        return solutionNode.board.isGoal();
     }
 
     // min number of moves to solve initial board; -1 if unsolvable
     public int moves() {
-        return -1;
+        return solutionNode.moves;
     }
 
     // sequence of boards in a shortest solution; null if unsolvable
     public Iterable<Board> solution() {
         Stack<Board> solvedStack = new Stack<Board>();
         SearchNode currentSolutionNode = solutionNode;
-        while (currentSolutionNode.prev != null) {
+        while (currentSolutionNode != null) {
             solvedStack.push(currentSolutionNode.board);
             currentSolutionNode = currentSolutionNode.prev;
         }
@@ -86,6 +86,7 @@ public class Solver {
 
         // solve the puzzle
         Solver solver = new Solver(initial);
+
 
         // print solution to standard output
         if (!solver.isSolvable()) {
