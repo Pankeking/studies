@@ -1,3 +1,5 @@
+import java.util.Comparator;
+
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.MinPQ;
 import edu.princeton.cs.algs4.StdOut;
@@ -9,18 +11,37 @@ public class Solver {
         Board prev;
         int moves;
     }
+    private class SearchNodeComparator implements Comparator<SearchNode> {
+        public int compare(SearchNode one, SearchNode two) {
+            int manhattan1 = one.board.manhattan() + one.moves;
+            int manhattan2 = two.board.manhattan() + two.moves;
+            return Integer.compare(manhattan1, manhattan2);
+        }
+    }
 
     // find a solution to the initial board (using the A* algorithm)
     public Solver(Board initial) {
+        if (initial == null) throw new IllegalArgumentException();
+
         SearchNode initialNode = new SearchNode();
         initialNode.board = initial;
         initialNode.prev = null;
         initialNode.moves = 0;
-        MinPQ<SearchNode> priorityQ = new MinPQ<SearchNode>();
+
+        Comparator<SearchNode> comparator = new SearchNodeComparator();
+        MinPQ<SearchNode> priorityQ = new MinPQ<SearchNode>(comparator);
+
         priorityQ.insert(initialNode);
         while (!priorityQ.isEmpty()) {
             SearchNode currentNode = priorityQ.delMin();
-            Iterable<Board> boards = currentNode.board.neighbors();       
+            Iterable<Board> boards = currentNode.board.neighbors();
+            for (Board board : boards) {
+                SearchNode newSearchNode = new SearchNode();
+                newSearchNode.board = board;
+                newSearchNode.prev = currentNode.board;
+                newSearchNode.moves = currentNode.moves + 1;
+                priorityQ.insert(newSearchNode);
+            } 
         }
     }
 
