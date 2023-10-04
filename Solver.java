@@ -11,13 +11,18 @@ public class Solver {
         Board board;
         SearchNode prev;
         int moves;
+        int manhattan;
     }
     private SearchNode solutionNode;
     private class SearchNodeComparator implements Comparator<SearchNode> {
         public int compare(SearchNode one, SearchNode two) {
-            int manhattan1 = one.board.manhattan() + one.moves;
-            int manhattan2 = two.board.manhattan() + two.moves;
-            return Integer.compare(manhattan1, manhattan2);
+            int manhattan1 = one.manhattan + one.moves;
+            int manhattan2 = two.manhattan + two.moves;
+            int compare = Integer.compare(manhattan1, manhattan2);
+            if (compare == 0) {
+                return Integer.compare(one.manhattan, two.manhattan);
+            }
+            return compare;
         }
     }
 
@@ -29,31 +34,57 @@ public class Solver {
         initialNode.board = initial;
         initialNode.prev = null;
         initialNode.moves = 0;
+        initialNode.manhattan = initial.manhattan();
+
+        SearchNode twinNode = new SearchNode();
+        Board twin = initial.twin();
+        twinNode.board = twin;
+        twinNode.prev = null;
+        twinNode.moves = 0;
+        twinNode.manhattan = twin.manhattan();
 
         Comparator<SearchNode> comparator = new SearchNodeComparator();
         MinPQ<SearchNode> priorityQ = new MinPQ<SearchNode>(comparator);
+        MinPQ<SearchNode> twinQ = new MinPQ<SearchNode>(comparator);
 
         priorityQ.insert(initialNode);
-        while (!priorityQ.isEmpty()) {
+        twinQ.insert(twinNode);
+        while (!priorityQ.isEmpty() || !twinQ.isEmpty()) {
             SearchNode currentNode = priorityQ.delMin();
+            SearchNode currentTwin = twinQ.delMin();
             if (currentNode.board.isGoal()) {
                 solutionNode = currentNode;
                 break;
             }
+            if (currentTwin.board.isGoal()) {
+                solutionNode.moves = -1;
+            }
             Iterable<Board> boards = currentNode.board.neighbors();
             for (Board board : boards) {
+                if (currentNode.prev != null && board.equals(currentNode.prev.board)) continue;
                 SearchNode newSearchNode = new SearchNode();
                 newSearchNode.board = board;
                 newSearchNode.prev = currentNode;
                 newSearchNode.moves = currentNode.moves + 1;
+                newSearchNode.manhattan = board.manhattan();
                 priorityQ.insert(newSearchNode);
-            } 
+            }
+            Iterable<Board> twinBoards = currentTwin.board.neighbors();
+            for (Board twinBoard : twinBoards) {
+                if (currentTwin.prev != null && twinBoard.equals(currentTwin.prev.board)) continue;
+                SearchNode newTwinSearchNode = new SearchNode();
+                newTwinSearchNode.board = twinBoard;
+                newTwinSearchNode.prev = currentTwin;
+                newTwinSearchNode.moves = currentTwin.moves + 1;    
+                newTwinSearchNode.manhattan = twinBoard.manhattan();
+                twinQ.insert(newTwinSearchNode);
+            }
         }
     }
 
     // is the initial board solvable? (see below)
     public boolean isSolvable() {
-        return solutionNode.board.isGoal();
+        return solutionNode.moves >= 0;
     }
 
     // min number of moves to solve initial board; -1 if unsolvable
@@ -94,8 +125,11 @@ public class Solver {
         }
         else {
             StdOut.println("Minimum number of moves = " + solver.moves());
+            // int i = 0;
             for (Board board : solver.solution()) {
+                // StdOut.println("Step: " + i);
                 StdOut.println(board);
+                // i++;
             }
         }
     }
