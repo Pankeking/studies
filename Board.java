@@ -7,8 +7,8 @@ import edu.princeton.cs.algs4.StdRandom;
 
 public class Board {
 
-    private int size;
-    private int[][] board;
+    private final int size;
+    private final int[][] board;
     // create a board from an n-by-n array of tiles,
     // where tiles[row][col] = tile at (row, col)
     public Board(int[][] tiles) {
