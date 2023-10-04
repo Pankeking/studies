@@ -9,6 +9,8 @@ public class Board {
 
     private final int size;
     private final int[][] board;
+    private final int twinX;
+    private final int twinY;
     // create a board from an n-by-n array of tiles,
     // where tiles[row][col] = tile at (row, col)
     public Board(int[][] tiles) {
@@ -22,7 +24,15 @@ public class Board {
             }
         }
         size = tiles.length;
-        board = tiles;
+        int x = StdRandom.uniformInt(size);
+        int y = StdRandom.uniformInt(size);
+        while (tiles[y][x] == 0) {
+            x = StdRandom.uniformInt(size);
+            y = StdRandom.uniformInt(size);
+        }
+        twinX = x;
+        twinY = y;
+        board = deepCopy(tiles);
     }
     // string representation of this board
     public String toString() {
@@ -159,12 +169,8 @@ public class Board {
     // a board that is obtained by exchanging any pair of tiles
     public Board twin() {
         int[][] twin = deepCopy(board);
-        int x = StdRandom.uniformInt(size);
-        int y = StdRandom.uniformInt(size);
-        while (twin[y][x] == 0) {
-            x = StdRandom.uniformInt(size);
-            y = StdRandom.uniformInt(size);
-        }
+        int x = twinX;
+        int y = twinY;
         if (x > 0 && twin[y][x-1] != 0) {
             swap(twin, y, x, y, x-1);
             return new Board(twin);
