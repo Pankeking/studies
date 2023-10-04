@@ -3,9 +3,16 @@ import edu.princeton.cs.algs4.StdOut;
 
 public class Solver {
 
+    private class SearchNode {
+        Board board;
+        Board prev = null;
+        int moves;
+    }
+
     // find a solution to the initial board (using the A* algorithm)
     public Solver(Board initial) {
-
+        SearchNode currentNode = new SearchNode();
+        currentNode.board = initial;
     }
 
     // is the initial board solvable? (see below)
