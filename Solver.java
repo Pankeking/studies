@@ -96,6 +96,7 @@ public class Solver {
 
     // sequence of boards in a shortest solution; null if unsolvable
     public Iterable<Board> solution() {
+        if (solutionNode.moves == -1) return null;
         Stack<Board> solvedStack = new Stack<Board>();
         SearchNode currentSolutionNode = solutionNode;
         while (currentSolutionNode != null) {
