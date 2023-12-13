@@ -29,7 +29,9 @@ def search(nums, lo, hi ,target):
 
 # test = int(input())
 
-for test in range(-50, 150):
-    print(binary_search(nums, test))
+for test in range(-1, 15):
+    # print(binary_search(nums, test))
     print(search(nums, 0, len(nums) - 1, test))
+    
+
     
