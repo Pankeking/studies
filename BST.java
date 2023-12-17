@@ -119,7 +119,46 @@ public class BST<Key extends Comparable<Key>, Value> {
         return null;
   }
 
-  public void delete(Key key) {}
+  public void deleteMin() {
+    root = deleteMin(root);
+  }
+  private Node deleteMin(Node node) {
+    if (node.left == null) return node.right;
+    node.left = deleteMin(node.left);
+    node.count = 1 + size(node.left) + size(node.right);
+    return node;
+  }
+  public void deleteMax() {
+    root = deleteMax(root);
+  }
+  private Node deleteMax(Node node) {
+    if (node.right == null) return node.left;
+    node.right = deleteMax(node.right);
+    node.count = 1 + size(node.right) + size(node.left);
+    return node;
+  }
+
+  public void delete(Key key) {
+    root = delete(root, key);
+  }
+  // HIBBARD DELETION
+  private Node delete(Node node, Key key) {
+    if (node == null) return null;
+    int compare = key.compareTo(node.key);
+    if (compare < 0) node.left = delete(node.left, key);
+    else if (compare > 0) node.right = delete(node.right, key);
+    else {
+      if (node.right == null) return node.left;
+      if (node.left == null) return node.right;
+
+      Node sucesor = node;
+      node = min(sucesor.right);
+      node.right = deleteMin(sucesor.right);
+      node.left = sucesor.left;
+    }
+    node.count = 1 + size(node.left) + size(node.right);
+    return node;
+  }
 
   public Iterable<Key> keys() {
         Queue<Key> q = new Queue<Key>();
