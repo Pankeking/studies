@@ -4,12 +4,11 @@ class Point:
         self.x = x
         self.y = y
 
-
 directions = [
-  [0,-1],
-  [1, 0],
-  [0, 1],
-  [-1,0]
+  [0,-1], # Up
+  [1, 0], # Right
+  [0, 1], # Down
+  [-1,0]  # Left
 ]
 
 def walk(maze: list[list[str]], wall: str, current: Point, end: Point, seen: list[list[bool]], path: list[Point]) -> bool:
@@ -65,29 +64,29 @@ maze = [
     ];
 
 maze_2 = [
-    "ooooooooooooooo",
-    "o             o",
-    "o ooo oooo oooo",
-    "o   o     o   ",
-    "o ooo oooo o   ",
-    "o   o     o   ",
-    "o ooo oooo oooo",
-    "o             o",
-    "ooooooooooooo o",
-    "              o",
-    "ooooooooooooo o",
-    "ooooooooooooo o",
-    "              o",
-    "ooooooooooooo o",
-    "              o",
-    "ooooooooooooo o",
-    "ooooooooooooo o",
-    "              o",
-    "o ooooooooooooo",
-    "o              ",
-    "oooooooooooooo ",
-    "oooooooooooooo ",
-    "oooooooooooooo ",
+    "ooooooooooooooo ",
+    "o               ",
+    "o ooo oooo ooooo",
+    "o   o     o     ",
+    "o ooo oooo o    ",
+    "o   o     o     ",
+    "o ooo oooo o oo ",
+    "o             o ",
+    "ooooooooooooo o ",
+    "              o ",
+    "ooooooooooooo o ",
+    "ooooooooooooo o ",
+    "              o ",
+    "ooooooooooooo o ",
+    "              o ",
+    "ooooooooooooo o ",
+    "ooooooooooooo o ",
+    "             oo ",
+    "o oooooooooo oo ",
+    "o          o    ",
+    "oooooooooo  oooo",
+    "ooooooooooo     ",
+    "oooooooooooooo  ",
 ]
     
 mazeResult = [
@@ -122,20 +121,15 @@ def draw_path(maze, path):
     return modified_maze
   
 result = solve(maze, "o", Point(10,0), Point(1, 5))
+
 drawn_result = draw_path(maze, result)
 drawn_check = draw_path(maze, mazeResult)
 
-for row in drawn_result:
-    print(row)
-print("\n")    
-for row in drawn_check:
-    print(row)
+
     
-print("\n")    
 result_2 = solve(maze_2, "o", Point(2,1), Point(14,22))
 drawn_2 = draw_path(maze_2, result_2)
 
-print("\n")
 colorama.init()
 messages = []
 for row in drawn_2:
@@ -158,6 +152,7 @@ for i in range(len(messages)):
         else:  
             print(messages[i][j], end="")
         
+
 
 
 
