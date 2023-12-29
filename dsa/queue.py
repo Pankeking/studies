@@ -1,11 +1,7 @@
-class Node:
-	def __init__(self, val) -> None:
-		self.val  = val
-		self.next = None
-
+from node import Node
 class Queue:
 	def __init__(self) -> None:
-		length = 0
+		self.length = 0
 		self.head = None
 		self.tail = None
 	
@@ -29,7 +25,10 @@ class Queue:
 
 		# Free Memory 
 		head.next = None
-		
+		if self.length == 0:
+			self.tail = None
+
+		return head.val
 	
 	def peek(self) -> int:
 		return self.head.val if self.head else None

@@ -1,25 +1,21 @@
-class ListNode:
-    def __init__(self, value=0, next=None):
-        self.value = value
-        self.next = next
-
+from dsa.node import Node
 class LinkedList:
     def __init__(self):
         self.head = None
 
     def add_to_head(self, value):
-        new_node = ListNode(value)
+        new_node = Node(value)
         new_node.next = self.head
         self.head = new_node
 
     def add(self, value):
         if not self.head:
-            self.head = ListNode(value)
+            self.head = Node(value)
         else:
             current = self.head
             while current.next:
                 current = current.next
-            current.next = ListNode(value)
+            current.next = Node(value)
 
     def display(self):
         current = self.head
@@ -57,7 +53,7 @@ def find_middle(head):
     return slow
 
 def merge(left, right):
-    dummy = ListNode()
+    dummy = Node()
     current = dummy
 
     while left and right:
