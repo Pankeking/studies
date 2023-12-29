@@ -1,15 +1,14 @@
 import time
 
 def deco(func):
-    def inner():
+    def wrapper(*args):
         start = time.time()
-        func()
+        r = func(*args)
         print((time.time() - start) * 1000)
-    return inner
+        return r
+    return wrapper
   
 @deco
 def exec():
     for i in range(10):
       print(i)
-
-exec()
