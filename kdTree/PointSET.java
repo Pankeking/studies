@@ -3,8 +3,6 @@ import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.Point2D;
 import edu.princeton.cs.algs4.RectHV;
 import edu.princeton.cs.algs4.In;
-
-
 import edu.princeton.cs.algs4.SET; 
 
 
@@ -43,6 +41,7 @@ public class PointSET {
 
 	public Iterable<Point2D> range(RectHV rect) { // all points that are inside the rectangle (or on the boundary) 
 		if (rect == null) throw new IllegalArgumentException();
+    
 		return null;
 	} 
 
@@ -65,10 +64,9 @@ public class PointSET {
 		Point2D queryPoint = new Point2D(0.082912, 0.519);
 		boolean queryResult = test.contains(queryPoint);
 		// test.draw();
+    RectHV rect = new RectHV(0.3, 0.2, 0.7, 0.6);
 		StdOut.println(queryResult);
 		StdOut.println(test.size());
 		StdOut.println(test.isEmpty());
-
-
 	} 
 }
