@@ -5,6 +5,7 @@ import edu.princeton.cs.algs4.StdDraw;
 import edu.princeton.cs.algs4.Point2D;
 import edu.princeton.cs.algs4.RectHV;
 import edu.princeton.cs.algs4.In;
+import edu.princeton.cs.algs4.Queue;
 
 public class KdTree {
 
@@ -65,7 +66,6 @@ public class KdTree {
       Node node = insert(p, axis, root.rt);
       root.rt = node;
     }
-    
     return root;
   }
 
@@ -76,7 +76,6 @@ public class KdTree {
     int axis = -1;
     double cmp;
     while (current != null) {
-
       if (current.p.equals(p)) return true;
 
       if (axis < 0) {
@@ -96,9 +95,7 @@ public class KdTree {
     return false;
     
   }
-  private boolean contains(Point2D p, int axis, Node root) {
-    return true;
-  }
+
   public void draw() {
     return;
   }
@@ -111,21 +108,23 @@ public class KdTree {
     return null;
   }
 
+
+
   public static void main(String[] args) {
-    Point2D queryPoint = new Point2D(0.5, 0.7);
-    KdTree tree = new KdTree();
-    tree.insert(queryPoint);
+    // Point2D queryPoint = new Point2D(0.5, 0.7);
+    // KdTree tree = new KdTree();
+    // tree.insert(queryPoint);
 
-    for (int i = 0; i < 12800; i++) {
-        double x = StdRandom.uniformDouble(0.0, 1.0);
-        double y = StdRandom.uniformDouble(0.0, 1.0);
-        Point2D point = new Point2D(x, y);
-        tree.insert(point);
-        StdOut.printf(" Found: %b\n", tree.contains(point));
-    }
+    // for (int i = 0; i < 12800; i++) {
+    //     double x = StdRandom.uniformDouble(0.0, 1.0);
+    //     double y = StdRandom.uniformDouble(0.0, 1.0);
+    //     Point2D point = new Point2D(x, y);
+    //     tree.insert(point);
+    //     StdOut.printf(" Found: %b\n", tree.contains(point));
+    // }
 
-    StdOut.println(tree.contains(new Point2D(0.5, 0.7)));
-    StdOut.println(tree.contains(new Point2D(0.3, 0.3)));
+    // StdOut.println(tree.contains(new Point2D(0.5, 0.7)));
+    // StdOut.println(tree.contains(new Point2D(0.3, 0.3)));
     return;
   }
 }
