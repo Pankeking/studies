@@ -110,20 +110,20 @@ public class KdTree {
 
 
   public static void main(String[] args) {
-    // Point2D queryPoint = new Point2D(0.5, 0.7);
-    // KdTree tree = new KdTree();
-    // tree.insert(queryPoint);
+    Point2D queryPoint = new Point2D(0.5, 0.7);
+    KdTree tree = new KdTree();
+    tree.insert(queryPoint);
 
-    // for (int i = 0; i < 12800; i++) {
-    //     double x = StdRandom.uniformDouble(0.0, 1.0);
-    //     double y = StdRandom.uniformDouble(0.0, 1.0);
-    //     Point2D point = new Point2D(x, y);
-    //     tree.insert(point);
-    //     StdOut.printf(" Found: %b\n", tree.contains(point));
-    // }
+    for (int i = 0; i < 12800; i++) {
+        double x = StdRandom.uniformDouble(0.0, 1.0);
+        double y = StdRandom.uniformDouble(0.0, 1.0);
+        Point2D point = new Point2D(x, y);
+        tree.insert(point);
+        StdOut.printf(" Found: %b\n", tree.contains(point));
+    }
 
-    // StdOut.println(tree.contains(new Point2D(0.5, 0.7)));
-    // StdOut.println(tree.contains(new Point2D(0.3, 0.3)));
+    StdOut.println(tree.contains(new Point2D(0.5, 0.7)));
+    StdOut.println(tree.contains(new Point2D(0.3, 0.3)));
     return;
   }
 }
