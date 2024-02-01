@@ -9,7 +9,6 @@ import edu.princeton.cs.algs4.Queue;
 
 public class KdTree {
 
-
   private static class Node {
     private Point2D p;
     private RectHV rect;
