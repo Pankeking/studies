@@ -181,8 +181,32 @@ public class KdTree {
     if (rect.contains(node.p)) {
       queue.enqueue(node.p);
     }
-    range(node.lb, rect, queue, !vertical);
-    range(node.rt, rect, queue, !vertical);
+
+    double cmp;
+    if (vertical) cmp = node.p.x() - rect.xmin();
+    else          cmp = node.p.y() - rect.ymin();
+      
+    if (vertical) {
+      if (rect.xmax() < node.p.x() > rect.xmin()) {
+        range(node.lb, rect, queue, !vertical);
+        range(node.rt, rect, queue, !vertical);
+      } else if (cmp > 0) {
+        range(node.lb, rect, queue, !vertical);
+      } else {
+        range(node.rt, rect, queue, !vertical);
+      }
+
+    } else {
+      if (rect.ymax() < node.p.y() > rect.ymin()) {
+        range(node.lb, rect, queue, !vertical);
+        range(node.rt, rect, queue, !vertical);
+      } else if (cmp > 0) {
+        range(node.lb, rect, queue, !vertical);
+      } else {
+        range(node.rt, rect, queue, !vertical);
+      }
+    }
+    
     
   }
 
