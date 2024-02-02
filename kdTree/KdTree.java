@@ -41,15 +41,16 @@ public class KdTree {
 
   public void insert(Point2D p) {
     if (p == null) throw new IllegalArgumentException();
-    Node root = insert(p, -1, this.root);
+    RectHV rect = new RectHV(0, 0, 1, 1);
+    Node root = insert(p, -1, this.root, rect);
     this.root = root;
   }
 
-  private Node insert(Point2D p, int axis, Node root) { // axis -1 X  // axis 1 Y
+  private Node insert(Point2D p, int axis, Node root, RectHV rect) { // axis -1 X  // axis 1 Y
     this.size++;
     if (root == null) {
       Node node = new Node(p);
-      node.rect = new RectHV(0, 0, 1, 1);
+      node.rect = rect;
       return node;
     }
     double cmp;
@@ -57,12 +58,21 @@ public class KdTree {
     else          cmp = root.p.y() - p.y();
 
     axis = axis > 0 ? -1 : 1;
+
+    RectHV nextRect = null;
+    if (axis < 0) {
+      nextRect = new RectHV(rect.xmin(), rect.ymin(), root.p.x(), rect.ymax());
+    } else {
+      nextRect = new RectHV(rect.xmin(), rect.ymin(), rect.xmax(), root.p.y());
+    }
+
+   
     if (cmp > 0)  {
-      Node node = insert(p, axis, root.lb);
+      Node node = insert(p, axis, root.lb, nextRect);
       root.lb = node;
     } 
     else if (cmp <= 0) {
-      Node node = insert(p, axis, root.rt);
+      Node node = insert(p, axis, root.rt, nextRect);
       root.rt = node;
     }
     return root;
@@ -100,7 +110,13 @@ public class KdTree {
   }
 
   public Iterable<Point2D> range(RectHV rect) {
-    return null;
+    Queue<Point2D> points = new Queue<Point2D>;
+    range(this.root, rect, points);
+    return points;
+  }
+
+  private void range(Node node, RectHV rect, Queue<Point2D> queue) {
+
   }
 
   public Point2D nearest(Point2D p) {
