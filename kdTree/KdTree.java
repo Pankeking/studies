@@ -186,26 +186,27 @@ public class KdTree {
     if (vertical) cmp = node.p.x() - rect.xmin();
     else          cmp = node.p.y() - rect.ymin();
       
-    if (vertical) {
-      if (rect.xmax() < node.p.x() > rect.xmin()) {
-        range(node.lb, rect, queue, !vertical);
-        range(node.rt, rect, queue, !vertical);
-      } else if (cmp > 0) {
-        range(node.lb, rect, queue, !vertical);
-      } else {
-        range(node.rt, rect, queue, !vertical);
-      }
-
-    } else {
-      if (rect.ymax() < node.p.y() > rect.ymin()) {
-        range(node.lb, rect, queue, !vertical);
-        range(node.rt, rect, queue, !vertical);
-      } else if (cmp > 0) {
-        range(node.lb, rect, queue, !vertical);
-      } else {
-        range(node.rt, rect, queue, !vertical);
-      }
+    if (vertical && rect.xmax() < node.p.x() > rect.xmin()) {
+      range(node.lb, rect, queue, !vertical);
+      range(node.rt, rect, queue, !vertical);
+      return;
+    } else if (vertical && cmp > 0) {
+      range(node.lb, rect, queue, !vertical);
+      return;
+    } else if (vertical && cmp <= 0) {
+      range(node.rt, rect, queue, !vertical);
+      return;
     }
+
+    if (rect.ymax() < node.p.y() > rect.ymin()) {
+      range(node.lb, rect, queue, !vertical);
+      range(node.rt, rect, queue, !vertical);
+    } else if (cmp > 0) {
+      range(node.lb, rect, queue, !vertical);
+    } else {
+      range(node.rt, rect, queue, !vertical);
+    }
+  
     
     
   }
