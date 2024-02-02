@@ -106,7 +106,15 @@ public class KdTree {
   }
 
   public void draw() {
+    if (root != null) {
+      draw(root, true);
+    }
     return;
+  }
+  private void draw(Node node, boolean vertical) {
+    if (node == null) {
+      return;
+    }
   }
 
   public Iterable<Point2D> range(RectHV rect) {
