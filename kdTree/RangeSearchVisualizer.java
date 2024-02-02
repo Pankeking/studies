@@ -41,7 +41,7 @@ public class RangeSearchVisualizer {
         // draw the points
         StdDraw.clear();
         StdDraw.setPenColor(StdDraw.BLACK);
-        StdDraw.setPenRadius(0.01);
+        StdDraw.setPenRadius(0.001);
         brute.draw();
         StdDraw.show();
 
@@ -70,7 +70,7 @@ public class RangeSearchVisualizer {
             // draw the points
             StdDraw.clear();
             StdDraw.setPenColor(StdDraw.BLACK);
-            StdDraw.setPenRadius(0.01);
+            StdDraw.setPenRadius(0.001);
             brute.draw();
 
             // draw the rectangle

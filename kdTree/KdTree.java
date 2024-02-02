@@ -170,12 +170,20 @@ public class KdTree {
 
   public Iterable<Point2D> range(RectHV rect) {
     Queue<Point2D> points = new Queue<Point2D>();
-    range(this.root, rect, points);
+    range(this.root, rect, points, true);
     return points;
   }
 
-  private void range(Node node, RectHV rect, Queue<Point2D> queue) {
-
+  private void range(Node node, RectHV rect, Queue<Point2D> queue, boolean vertical) {
+    if (node == null) {
+      return;
+    }
+    if (rect.contains(node.p)) {
+      queue.enqueue(node.p);
+    }
+    range(node.lb, rect, queue, !vertical);
+    range(node.rt, rect, queue, !vertical);
+    
   }
 
   public Point2D nearest(Point2D p) {
