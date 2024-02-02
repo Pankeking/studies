@@ -40,15 +40,15 @@ public class KdTree {
   }
 
   public void insert(Point2D p) {
-    if (p == null) throw new IllegalArgumentException();
+    if (p == null) throw new IllegalArgumentException("Called insert() with a null point");
     RectHV rect = new RectHV(0, 0, 1, 1);
     Node root = insert(p, true, this.root, rect);
     this.root = root;
   }
 
-  private Node insert(Point2D p, boolean vertical, Node root, RectHV rect) { // axis X true  // axis 1 Y
-    this.size++;
+  static private Node insert(Point2D p, boolean vertical, Node root, RectHV rect) { // axis X true  // axis 1 Y
     if (root == null) {
+      this.size++;
       Node node = new Node(p);
       node.rect = rect;
       return node;
@@ -60,37 +60,45 @@ public class KdTree {
     else          cmp = root.p.y() - p.y();
 
     RectHV nextRect = null;
-    if (vertical) {
-      nextRect = new RectHV(rect.xmin(), rect.ymin(), root.p.x(), rect.ymax());
-    } else {
-      nextRect = new RectHV(rect.xmin(), rect.ymin(), rect.xmax(), root.p.y());
-    }
+
+    // 
+    if (root.p.equals(p)) return root;
 
     if (cmp > 0 && vertical)  {
+      // decrease X max
       nextRect = new RectHV(rect.xmin(), rect.ymin(), root.p.x(), rect.ymax());
       Node node = insert(p, !vertical, root.lb, nextRect);
       root.lb = node;
     } 
     else if (cmp > 0 && !vertical)  {
-      nextRect = new RectHV(rect.xmin(), root.p.y(), rect.xmax(), rect.ymax());
+      // decrease Y max
+      nextRect = new RectHV(rect.xmin(), rect.ymin(), rect.xmax(), root.p.y());
       Node node = insert(p, !vertical, root.lb, nextRect);
       root.lb = node;
     } 
-    else if (cmp <= 0 && vertical) {
+    else if (cmp < 0 && vertical) {
+      // increase X min
       nextRect = new RectHV(root.p.x(), rect.ymin(), rect.xmax(), rect.ymax());
       Node node = insert(p, !vertical, root.rt, nextRect);
       root.rt = node;
     }
-    else if (cmp <= 0 && !vertical) {
-      nextRect = new RectHV(rect.xmin(), rect.ymin(), rect.xmax(), root.p.y());
+    else if (cmp < 0 && !vertical) {
+      // increase Y min
+      nextRect = new RectHV(rect.xmin(), root.p.y(), rect.xmax(), rect.ymax());
       Node node = insert(p, !vertical, root.rt, nextRect);
       root.rt = node;
     }
+    else {
+      // default right node
+      Node node = insert(p, !vertical, root.rt, rect);
+      root.rt = node;
+    }
+    //
     return root;
   }
 
   public boolean contains(Point2D p) {
-    if (p == null) throw new IllegalArgumentException();
+    if (p == null) throw new IllegalArgumentException("Called contains() with a null point");
     if (this.root == null) return false;
     Node current = this.root;
     boolean vertical = true;
@@ -112,21 +120,19 @@ public class KdTree {
       }
     }
     return false;
-    
   }
 
   public void draw() {
-    if (root != null) {
-      StdDraw.setXscale(0, 1);
-      StdDraw.setYscale(0, 1);
-      draw(root, false);
-    }
+    StdDraw.setXscale(0, 1);
+    StdDraw.setYscale(0, 1);
+    draw(this.root, true);
     return;
   }
-  private void draw(Node node, boolean vertical) {
+  static private void draw(Node node, boolean vertical) {
     if (node == null) {
       return;
     }
+    
     // Draw Point
     StdDraw.setPenColor(StdDraw.BLACK);
     StdDraw.setPenRadius(0.01);
