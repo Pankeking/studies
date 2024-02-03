@@ -209,9 +209,30 @@ public class KdTree {
   }
 
   public Point2D nearest(Point2D p) {
-    return null;
+    if (p == null) throw new IllegalArgumentException("Called nearest() with a null point");
+    if (this.root == null) return null;
+    Point2D champion = nearest(this.root, p, this.root.p, true);
+    return champion;
   }
 
+  private Point2D nearest(Node node, Point2D query, Point2D champion, boolean vertical) {
+    if (node == null) return null;
+    if (node.rect.distanceSquaredTo(query) > query.distanceSquaredTo(champion)) return null;
+    if (node.p.distanceSquaredTo(query) > champion.distanceSquaredTo(query)) {
+      champion = node.p;
+    }
+    
+    double cmp;
+    if (vertical) cmp = node.p.x() - query.x();
+    else          cmp = node.p.y() - query.y();
+
+    if (cmp < 0) {
+      nearest(node.lb, query, champion, !vertical);
+    }
+
+
+    return null;
+  }
 
 
   public static void main(String[] args) {
