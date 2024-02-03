@@ -211,17 +211,15 @@ public class KdTree {
   public Point2D nearest(Point2D p) {
     if (p == null) throw new IllegalArgumentException("Called nearest() with a null point");
     if (this.root == null) return null;
-    Point2D champion = nearest(this.root, p, this.root.p, true);
-    return champion;
+    return nearest(this.root, p, this.root.p, true);
   }
 
   private Point2D nearest(Node node, Point2D query, Point2D champion, boolean vertical) {
-    // if (node == null) return champion;
     if (node == null || node.rect.distanceSquaredTo(query) > query.distanceSquaredTo(champion)) {
       return champion;
     }
 
-    if (node.p.distanceSquaredTo(query) > champion.distanceSquaredTo(query)) {
+    if (node.p.distanceSquaredTo(query) < champion.distanceSquaredTo(query)) {
       champion = node.p;
     }
     
@@ -229,12 +227,18 @@ public class KdTree {
     if (vertical) cmp = node.p.x() - query.x();
     else          cmp = node.p.y() - query.y();
 
+    Point2D lb_contender;
+    Point2D rt_contender;
     if (cmp < 0) {
-      nearest(node.lb, query, champion, !vertical);
+      lb_contender = nearest(node.lb, query, champion, !vertical);
+      rt_contender = nearest(node.rt, query, champion, !vertical);
+    } else {
+      rt_contender = nearest(node.rt, query, champion, !vertical);
+      lb_contender = nearest(node.lb, query, champion, !vertical);
     }
-
-
-    return null;
+    if (lb_contender.distanceSquaredTo(query) < champion.distanceSquaredTo(query)) champion = lb_contender;
+    if (rt_contender.distanceSquaredTo(query) < champion.distanceSquaredTo(query)) champion = rt_contender;
+    return champion;
   }
 
 
