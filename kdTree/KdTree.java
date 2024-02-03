@@ -206,9 +206,6 @@ public class KdTree {
     } else {
       range(node.rt, rect, queue, !vertical);
     }
-  
-    
-    
   }
 
   public Point2D nearest(Point2D p) {
